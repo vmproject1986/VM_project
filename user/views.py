@@ -3,21 +3,8 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from .models import Profile
-import json
-
-from django.http import JsonResponse
-from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.models import User
-from .models import Profile
-import json
-
-# Create a new user and profile
-from django.http import JsonResponse
-from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.models import User
-from .models import Profile
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
 import json
 
 # Create a new user and profile
@@ -26,7 +13,7 @@ import json
 def create_user(request):
     try:
         content = json.loads(request.body)
-        profile_data = content.pop("profile")
+        profile_data = content.pop("profile", {})
 
         # Check if the user already exists by username or email
         if User.objects.filter(username=content["username"]).exists() or User.objects.filter(email=content["email"]).exists():
@@ -44,17 +31,18 @@ def create_user(request):
         return JsonResponse({"error": str(e)}, status=400)
 
 
-@csrf_exempt
-@require_http_methods(["GET"])
+# Retrieve the list of users (Protected by JWT)
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def user_list(request):
     users = User.objects.all()
     data = [{"id": user.id, "username": user.username, "email": user.email} for user in users]
     return JsonResponse(data, safe=False)
 
 
-# Retrieve, update, or delete a user and profile
-@csrf_exempt
-@require_http_methods(["GET", "PUT", "DELETE"])
+# Retrieve, update, or delete a user and profile (Protected by JWT)
+@api_view(["GET", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
 def user_detail(request, user_id):
     try:
         user = User.objects.get(pk=user_id)
