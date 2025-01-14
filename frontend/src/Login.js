@@ -11,16 +11,8 @@ function Login({ setAuthenticated }) {
       // Make the login request
       const response = await API.post('/token/', { username, password });
 
-      // Store tokens in localStorage
-      localStorage.setItem('access_token', response.data.access);
-      localStorage.setItem('refresh_token', response.data.refresh);
-
-      // Update the authenticated state
-      setAuthenticated(true);
-
-      // Test the token attachment by making an authenticated request
-      const userResponse = await API.get('/user/user_list');
-      console.log('User Data:', userResponse.data);
+      // Store tokens and update authentication state
+      setAuthenticated(response.data.access, response.data.refresh);
 
       alert('Login successful!');
     } catch (error) {

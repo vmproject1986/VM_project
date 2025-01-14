@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Login from './Login';
 import UserList from './components/UserList';
 import useAuth from './hooks/useAuth';
 
 function App() {
-  const { isAuthenticated, logout } = useAuth();
-  const [authenticated, setAuthenticated] = useState(isAuthenticated);
+  const { isAuthenticated, login, logout } = useAuth();
 
   return (
     <div>
       <h1>Welcome to VM Project</h1>
 
-      {authenticated ? (
+      {isAuthenticated ? (
         <div>
           <p>You are logged in!</p>
-          <button onClick={() => logout(setAuthenticated)}>Logout</button>
+          <button onClick={logout}>Logout</button>
           <UserList />
         </div>
       ) : (
-        <Login setAuthenticated={setAuthenticated} />
+        <Login setAuthenticated={login} />
       )}
     </div>
   );

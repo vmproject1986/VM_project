@@ -39,13 +39,17 @@ function UserList() {
             <strong>Username:</strong> {user.username} <br />
             <strong>Email:</strong> {user.email} <br />
             {user.profile && (
-              <div>
-                <strong>Allergies:</strong> {user.profile.allergies || 'None'} <br />
-                <strong>Dietary Restrictions:</strong> {user.profile.dietary_restrictions || 'None'} <br />
-                <strong>Health Goals:</strong> {user.profile.health_goals || 'None'} <br />
-                <strong>Budget:</strong> {user.profile.budget || 'Not set'}
-              </div>
-            )}
+                <div>
+                    <strong>Allergies:</strong> {user.profile.allergies || 'None'} <br />
+                    <strong>Dietary Restrictions:</strong> {user.profile.dietary_restrictions || 'None'} <br />
+                    <strong>Dietary Preferences:</strong> {user.profile.dietary_preferences || 'None'} <br />
+                    <strong>Preferred Foods:</strong> {user.profile.preferred_foods || 'None'} <br />
+                    <strong>Lifestyle:</strong> {user.profile.lifestyle || 'None'} <br />
+                    <strong>Health Goals:</strong> {user.profile.health_goals || 'None'} <br />
+                    <strong>Budget:</strong> {user.profile.budget || 'Not set'} <br />
+                    <strong>Additional Info:</strong> {user.profile.additional_info || 'None'}
+                </div>
+            )}          
           </li>
         ))}
       </ul>
