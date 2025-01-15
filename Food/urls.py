@@ -7,7 +7,8 @@ from .views import (
     create_recipe,
     get_user_recipes,
     recipe_detail,
-    list_api_responses
+    list_api_responses,
+    generate_grocery_list
 )
 
 urlpatterns = [
@@ -23,4 +24,7 @@ urlpatterns = [
 
     # API Response URLs
     path('api-responses/', list_api_responses, name='api-response-list'),
+
+    # OpenAI API URL
+    path('generate-grocery-list/', generate_grocery_list, name='generate-grocery-list'),
 ]
