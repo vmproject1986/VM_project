@@ -11,7 +11,7 @@ class WaterIntake(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.amount} liters on {self.timestamp.strftime('%Y-%m-%d')}"
 
-# 🌙 Sleep Model
+# Sleep Model
 class Sleep(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=4, decimal_places=2)  # Hours slept
@@ -19,7 +19,8 @@ class Sleep(models.Model):
     target_goal = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)  # Target hours
 
     def __str__(self):
-        return f"{self.user.username} - {self.amount} hours on {self.timestamp.strftime('%Y-%m-%d')}"
+        return f"{self.user.username} - {self.amount} hours (Quality: {self.quality})"
+
 
 # 🧘 Meditation Model
 class Meditation(models.Model):
@@ -54,3 +55,14 @@ class Exercise(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.name} for {self.duration} minutes on {self.timestamp.strftime('%Y-%m-%d')}"
+
+
+# 🧠 Mood Model
+class Mood(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    mood = models.CharField(max_length=50)  # e.g., Happy, Sad, Anxious
+    notes = models.TextField(blank=True, null=True)  # Optional notes
+    timestamp = models.DateTimeField(auto_now_add=True)  # Automatically capture the mood entry time
+
+    def __str__(self):
+        return f"{self.user.username} - Mood: {self.mood} on {self.timestamp.strftime('%Y-%m-%d')}"
