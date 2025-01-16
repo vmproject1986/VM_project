@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
-import API from './api';
+import { useNavigate, useLocation } from 'react-router-dom';
+import API from '../api';
 
-function Login({ setAuthenticated }) {
+function Login({ login }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Get the target page from the location state or default to home
+  const from = location.state?.from?.pathname || '/';
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -11,10 +17,13 @@ function Login({ setAuthenticated }) {
       // Make the login request
       const response = await API.post('/token/', { username, password });
 
-      // Store tokens and update authentication state
-      setAuthenticated(response.data.access, response.data.refresh);
+      // Use the login method passed as a prop to set tokens and authentication state
+      login(response.data.access, response.data.refresh);
 
       alert('Login successful!');
+
+      // Redirect the user to the target page
+      navigate('/dashboard', { replace: true });
     } catch (error) {
       console.error('Login failed:', error);
       alert('Login failed!');

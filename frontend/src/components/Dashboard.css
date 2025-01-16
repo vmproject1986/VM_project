@@ -1,0 +1,184 @@
+/* Dashboard container */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 98%;
+    height: 98vh;
+    margin: 1%;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Header styling */
+  .dashboard-header {
+    display: flex;
+    justify-content: center; /* Center the title horizontally */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative; /* Allow the account icon to be positioned independently */
+  }
+
+  .dashboard-header h1 {
+    font-size: 3rem; /* Larger font size for emphasis */
+    font-weight: bold;
+  }
+
+  .account-icon {
+    font-size: 2rem; /* Larger icon size */
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: absolute;
+    right: 0; /* Align icon to the far right */
+  }
+
+  /* Main content */
+  .dashboard-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    max-width: 1200px; /* Optional max width for larger screens */
+  }
+
+  .dashboard-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 2rem; /* Larger font size for readability */
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    padding: 20px; /* Add some padding for better button size */
+    margin: 10px 0; /* Add spacing between buttons */
+  }
+
+  .dashboard-button:hover {
+    transform: scale(1.05);
+  }
+
+  .top {
+    height: 45%; /* Take up nearly half the height */
+    width: 100%;
+    margin-bottom: 20px; /* Increased spacing for aesthetics */
+  }
+
+  .dashboard-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* More space between bottom buttons */
+    height: 45%; /* Take up nearly half the height */
+    width: 100%;
+  }
+
+  .dashboard-row .dashboard-button {
+    flex: 1;
+    margin: 0;
+  }
+
+  /* Sidebar styling */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0%; /* Hidden off-screen by default */
+    width: 40%;
+    height: 100%;
+    background-color: #3e1be9;
+    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    transition: transform 0.3s ease, visibility 0s 0.3s;
+    visibility: hidden; /* Hidden by default */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push the logout button to the bottom */
+    padding: 20px;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.3s ease, visibility 0s 0s;
+  }
+
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar ul li {
+    margin: 20px 0;
+    cursor: pointer;
+    font-size: 2rem;
+    color: #fff;
+    text-align: center;
+  }
+
+  .sidebar ul li:hover {
+    text-decoration: underline;
+  }
+
+  /* Logout button styling */
+  .logout-button {
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    transition: background-color 0.2s ease;
+  }
+
+  .logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Close Sidebar button */
+  .close-sidebar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .close-sidebar:hover {
+    color: #ddd;
+  }
+
+
+  /* Overlay styling */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0s 0.3s; /* Smooth transition */
+    z-index: 999; /* Below the sidebar */
+  }
+
+  .sidebar-overlay.active {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease, visibility 0s 0s; /* Immediate visibility */
+  }

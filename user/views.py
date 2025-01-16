@@ -9,26 +9,32 @@ import json
 
 # Create a new user and profile
 @csrf_exempt
-@require_http_methods(["POST"])
 def create_user(request):
-    try:
-        content = json.loads(request.body)
-        profile_data = content.pop("profile", {})
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            username = data.get('username')
+            password = data.get('password')
+            email = data.get('email')
 
-        # Check if the user already exists by username or email
-        if User.objects.filter(username=content["username"]).exists() or User.objects.filter(email=content["email"]).exists():
-            return JsonResponse({"error": "User already exists"}, status=400)
+            # Ensure all fields are provided
+            if not username or not password or not email:
+                return JsonResponse({'error': 'Username, password, and email are required.'}, status=400)
 
-        # Create the user
-        user = User.objects.create_user(**content)
+            # Check if the username already exists
+            if User.objects.filter(username=username).exists():
+                return JsonResponse({'error': 'User already exists.'}, status=400)
 
-        # Create or update the profile
-        Profile.objects.update_or_create(user=user, defaults=profile_data)
+            # Create the user
+            user = User.objects.create_user(username=username, password=password, email=email)
 
-        return JsonResponse({"success": "User created successfully"}, status=201)
+            # Optionally, create an empty Profile for the user
+            Profile.objects.create(user=user)
 
-    except Exception as e:
-        return JsonResponse({"error": str(e)}, status=400)
+            return JsonResponse({'success': 'User created successfully.'}, status=201)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+    return JsonResponse({'error': 'Invalid request method.'}, status=405)
 
 
 # Retrieve the list of users (Protected by JWT)
@@ -46,7 +52,13 @@ def user_list(request):
 def user_detail(request, user_id):
     try:
         user = User.objects.get(pk=user_id)
-        profile = user.profile
+
+        # Check if the user has an associated Profile
+        try:
+            profile = user.profile
+        except Profile.DoesNotExist:
+            # Return a placeholder profile or handle the missing profile gracefully
+            profile = None
 
         if request.method == "GET":
             # Return user and profile data
@@ -54,16 +66,16 @@ def user_detail(request, user_id):
                 "username": user.username,
                 "email": user.email,
                 "profile": {
-                    "avatar": profile.avatar.url if profile.avatar else None,
-                    "allergies": profile.allergies,
-                    "dietary_restrictions": profile.dietary_restrictions,
-                    "dietary_preferences": profile.dietary_preferences,
-                    "preferred_foods": profile.preferred_foods,
-                    "lifestyle": profile.lifestyle,
-                    "health_goals": profile.health_goals,
-                    "budget": profile.budget,
-                    "additional_info": profile.additional_info,
-                },
+                    "avatar": profile.avatar.url if profile and profile.avatar else None,
+                    "allergies": profile.allergies if profile else None,
+                    "dietary_restrictions": profile.dietary_restrictions if profile else None,
+                    "dietary_preferences": profile.dietary_preferences if profile else None,
+                    "preferred_foods": profile.preferred_foods if profile else None,
+                    "lifestyle": profile.lifestyle if profile else None,
+                    "health_goals": profile.health_goals if profile else None,
+                    "budget": profile.budget if profile else None,
+                    "additional_info": profile.additional_info if profile else None,
+                } if profile else None,
             }
             return JsonResponse(data, safe=False)
 
@@ -76,14 +88,18 @@ def user_detail(request, user_id):
                 setattr(user, attr, value)
             user.save()
 
-            for attr, value in profile_data.items():
-                setattr(profile, attr, value)
-            profile.save()
+            # Update profile only if it exists
+            if profile:
+                for attr, value in profile_data.items():
+                    setattr(profile, attr, value)
+                profile.save()
 
             return JsonResponse({"message": "User updated successfully"})
 
         elif request.method == "DELETE":
             # Delete user and profile
+            if profile:
+                profile.delete()
             user.delete()
             return JsonResponse({"message": "User deleted successfully"})
 

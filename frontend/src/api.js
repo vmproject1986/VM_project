@@ -27,20 +27,19 @@ API.interceptors.response.use(
   async (error) => {
     if (error.response && error.response.status === 401) {
       try {
-        // Refresh the access token
         const refreshToken = localStorage.getItem('refresh_token');
         const refreshResponse = await axios.post('http://localhost:8000/api/token/refresh/', {
           refresh: refreshToken,
         });
 
-        // Store the new access token
+        // Store the new access and refresh tokens
         localStorage.setItem('access_token', refreshResponse.data.access);
+        localStorage.setItem('refresh_token', refreshResponse.data.refresh);
 
         // Retry the original request with the new token
         error.config.headers.Authorization = `Bearer ${refreshResponse.data.access}`;
         return API.request(error.config);
       } catch (refreshError) {
-        // If the refresh fails, clear the tokens and redirect to login
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         window.location.href = '/';
@@ -50,5 +49,6 @@ API.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
 
 export default API;
