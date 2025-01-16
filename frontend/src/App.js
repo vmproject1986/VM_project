@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import ProtectedRoute from './components/ProtectedRoute';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import UserList from './components/UserList';
 import Dashboard from './components/Dashboard';
-import { jwtDecode } from 'jwt-decode';
+import FoodForm from './pages/FoodForm';
+import GroceryList from './pages/GroceryList';
+import Recipes from './pages/Recipes';
+import FoodDashBoard from './components/FoodDashBoard';
+import Sidebar from './components/Sidebar';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -61,6 +66,11 @@ function App() {
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} loading={loading} />}>
           <Route path="/user-list" element={<UserList />} />
           <Route path="/dashboard" element={<Dashboard logout={logout} />} />
+          <Route path="/food-form" element={<FoodForm />} />
+          <Route path="/grocery-list" element={<GroceryList />} />
+          <Route path="/recipes" element={<Recipes />} />
+          <Route path="/food-dashboard" element={<FoodDashBoard logout={logout}/>} />
+          <Route path="/sidebar" element={<Sidebar logout={logout} />} />
         </Route>
       </Routes>
     </Router>

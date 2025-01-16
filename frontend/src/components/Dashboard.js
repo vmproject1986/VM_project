@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom'; // Import NavLink
 import './Dashboard.css';
-import { useNavigate } from 'react-router-dom';
+import Sidebar from './Sidebar';
 
 function Dashboard({ logout }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -13,14 +13,6 @@ function Dashboard({ logout }) {
   const closeSidebar = () => {
     setIsSidebarOpen(false);
   };
-
-  const handleLogout = () => {
-    console.log('Logout button clicked');
-    logout(); // Clear tokens and update state
-    navigate('/');
-  };
-
-
 
   return (
     <div className="dashboard-container">
@@ -32,15 +24,12 @@ function Dashboard({ logout }) {
         </button>
       </div>
 
-      {/* Overlay */}
-      {isSidebarOpen && (
-        <div className="sidebar-overlay active" onClick={closeSidebar}></div>
-      )}
-
       {/* Main Content */}
       <div className="dashboard-content">
         {/* Top container */}
-        <div className="dashboard-button top">Diet & Nutrition</div>
+        <NavLink to="/food-dashboard" className="dashboard-button top">
+          Diet & Nutrition
+        </NavLink>
 
         {/* Bottom row */}
         <div className="dashboard-row">
@@ -50,21 +39,7 @@ function Dashboard({ logout }) {
       </div>
 
       {/* Sidebar */}
-      <div className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
-        <button className="close-sidebar" onClick={closeSidebar}>
-          X
-        </button>
-        <ul>
-          <li>Update Preferences</li>
-          <li>About</li>
-          <li>Pricing</li>
-          <li>Contact</li>
-          <li>Resources</li>
-        </ul>
-        <button className="logout-button" onClick={handleLogout}>
-          Logout
-        </button>
-      </div>
+      <Sidebar isSidebarOpen={isSidebarOpen} closeSidebar={closeSidebar} logout={logout} />
     </div>
   );
 }

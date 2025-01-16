@@ -1,0 +1,53 @@
+/* SharedPageStyles.css */
+
+/* Shared styles for page containers */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+  }
+
+  /* Title styling */
+  .page-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  /* Back to Menu button */
+  .back-to-menu-button {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .back-to-menu-button:hover {
+    background-color: #0056b3;
+  }
+
+  .dropdown-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .dropdown-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .dropdown-container p {
+    margin: 5px 0;
+    font-size: 1rem;
+  }
