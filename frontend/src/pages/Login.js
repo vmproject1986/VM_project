@@ -1,56 +1,67 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import API from '../api';
+import './Login.css';
 
 function Login({ login }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Get the target page from the location state or default to home
-  const from = location.state?.from?.pathname || '/';
+  // Get the target page from the location state or default to dashboard
+  const from = location.state?.from?.pathname || '/dashboard';
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError(null);
+
     try {
-      // Make the login request
       const response = await API.post('/token/', { username, password });
 
-      // Use the login method passed as a prop to set tokens and authentication state
+      // Use the login method passed as a prop
       login(response.data.access, response.data.refresh);
 
-      alert('Login successful!');
-
-      // Redirect the user to the target page
-      navigate('/dashboard', { replace: true });
+      navigate(from, { replace: true });
     } catch (error) {
       console.error('Login failed:', error);
-      alert('Login failed!');
+      setError('Invalid username or password');
     }
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <h2>Login</h2>
-      <div>
-        <label>Username:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button type="submit">Login</button>
-    </form>
+    <div className="login-container">
+      <h1 className="login-title">Login</h1>
+      <form onSubmit={handleLogin} className="login-form">
+        {error && <p className="error-message">{error}</p>}
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter your username"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+        <button type="submit" className="login-button">
+          Login
+        </button>
+      </form>
+    </div>
   );
 }
 

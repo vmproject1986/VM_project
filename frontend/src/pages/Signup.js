@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../api';
 import useAuth from '../hooks/useAuth';
+import './Signup.css';
 
 function Signup() {
   const [username, setUsername] = useState('');
@@ -37,40 +38,51 @@ function Signup() {
   };
 
   return (
-    <form onSubmit={handleSignup}>
-      <h2>Signup</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <div>
-        <label>Username:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          disabled={loading}
-        />
-      </div>
-      <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={loading}
-        />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          disabled={loading}
-        />
-      </div>
-      <button type="submit" disabled={loading}>
-        {loading ? 'Signing up...' : 'Signup'}
-      </button>
-    </form>
+    <div className="signup-container">
+      <h1 className="signup-title">Signup</h1>
+      <form onSubmit={handleSignup} className="signup-form">
+        {error && <p className="error-message">{error}</p>}
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter your username"
+            disabled={loading}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            disabled={loading}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            disabled={loading}
+            required
+          />
+        </div>
+        <button type="submit" className="signup-button" disabled={loading}>
+          {loading ? 'Signing up...' : 'Signup'}
+        </button>
+      </form>
+    </div>
   );
 }
 

@@ -111,6 +111,7 @@
     visibility: visible;
     transition: transform 0.3s ease, visibility 0s 0s;
   }
+  
 
   .sidebar ul {
     list-style: none;

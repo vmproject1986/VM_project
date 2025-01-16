@@ -52,7 +52,7 @@ function Dashboard({ logout }) {
       {/* Sidebar */}
       <div className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
         <button className="close-sidebar" onClick={closeSidebar}>
-          Close Sidebar
+          X
         </button>
         <ul>
           <li>Update Preferences</li>
