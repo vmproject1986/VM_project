@@ -52,11 +52,16 @@ function Sidebar({ isSidebarOpen, closeSidebar, logout }) {
                         )}
                     </li>
                     <li onClick={() => toggleDropdown('contact')}>
-                        Contact
+                        Feedback
                         {activeDropdown === 'contact' && (
                             <div className="dropdown">
-                                <button onClick={() => navigate('/contact')}>Contact</button>
-                            </div>
+                            <button
+                              className="feedback-button"
+                              onClick={() => navigate('/contact')}
+                            >
+                              Feedback
+                            </button>
+                          </div>
                         )}
                     </li>
                     <li onClick={() => toggleDropdown('resources')}>

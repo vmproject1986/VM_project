@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import emailjs from 'emailjs-com';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -35,16 +35,19 @@ function Contact() {
 
   return (
     <div className="page-container">
-      <h1>Contact Us</h1>
-      <p>Have questions? Reach out to us via the form below.</p>
+      <h1>Feedback</h1>
+      <p>We'd love to hear your thoughts!</p>
+      <NavLink to="/dashboard" className="back-to-dashboard">
+        Back to Dashboard
+      </NavLink>
       <form ref={form} onSubmit={sendEmail} className="contact-form">
         <div className="form-group">
           <label htmlFor="name">Name:</label>
-          <input type="text" id="name" name="user_name" required />
+          <input type="text" id="to_name" name="to_name" required />
         </div>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="user_email" required />
+          <input type="email" id="from_name" name="from_name" required />
         </div>
         <div className="form-group">
           <label htmlFor="message">Message:</label>

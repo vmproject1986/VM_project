@@ -93,3 +93,42 @@
 .logout-button:hover {
   background-color: #e0e0e0; /* Light grey on hover */
 }
+
+
+.sidebar ul li.feedback-button {
+  background-color: #0056b3; /* Blue background for the Feedback button */
+  color: #fff; /* White text for contrast */
+  padding: 10px 20px; /* Add padding for button-like appearance */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+.sidebar ul li.feedback-button:hover {
+  background-color: #003f7f; /* Darker blue on hover */
+  transform: translateY(-2px); /* Lift on hover */
+  color: #f5f5f5; /* Slightly lighter text on hover for clarity */
+}
+
+.feedback-button {
+  background-color: #0056b3; /* Blue background */
+  color: #fff; /* White text for good contrast */
+  padding: 10px 20px; /* Padding for a button-like feel */
+  border: none; /* Remove the default border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 1.2rem; /* Larger font size */
+  cursor: pointer; /* Pointer cursor to indicate clickable button */
+  text-align: center; /* Center-align the text */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+}
+
+.feedback-button:hover {
+  background-color: #003f7f; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.feedback-button:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 6px rgba(0, 86, 179, 0.5); /* Glow effect for focus */
+}
