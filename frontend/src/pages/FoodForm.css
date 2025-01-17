@@ -1,73 +1,90 @@
-.form-container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+.food-form-container {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px;
+  background-color: #d9d9d9; /* Darker background to match recipe/grocery list cards */
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); /* Stronger shadow for better depth */
+}
 
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+.form-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #1a1a1a; /* Darker color for high contrast */
+}
 
-  .form-group {
-    margin-bottom: 15px;
-  }
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
 
-  label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-  }
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  color: #333; /* Slightly darker label text */
+}
 
-  input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #aaa; /* Darker border for more defined input fields */
+  border-radius: 5px;
+  background-color: #f0f0f0; /* Slightly darker input background */
+  color: #222; /* Dark text for readability */
+}
 
-  .btn {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font-size: 1.2rem;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+input:focus {
+  border-color: #0056b3; /* Highlight color for focus */
+  outline: none;
+  box-shadow: 0 0 6px rgba(0, 86, 179, 0.5); /* Glow effect for focus */
+}
 
-  .btn:disabled {
-    background-color: #cccccc;
-  }
+.submit-button {
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #0056b3; /* Consistent dark blue */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 20px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
+}
 
-  .btn:hover {
-    background-color: #0056b3;
-  }
+.submit-button:disabled {
+  background-color: #999999;
+  cursor: not-allowed;
+}
 
-  .form-message {
-    text-align: center;
-    margin-top: 15px;
-    color: green;
-    font-weight: bold;
-  }
+.submit-button:hover {
+  background-color: #003f7f; /* Darker hover state */
+  transform: translateY(-2px);
+}
 
-  .back-button {
-    display: inline-block;
-    margin-bottom: 20px;
-    padding: 10px 15px;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #007bff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
+.form-message {
+  margin-top: 15px;
+  color: green;
+  font-weight: bold;
+}
 
-  .back-button:hover {
-    background-color: #0056b3;
-  }
+.back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #0056b3; /* Match button color */
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+}
+
+.back-button:hover {
+  background-color: #003f7f;
+  transform: translateY(-2px);
+}

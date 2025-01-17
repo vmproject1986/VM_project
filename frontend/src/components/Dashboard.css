@@ -51,19 +51,54 @@
 
   .dashboard-button {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
+    justify-content: center; /* Center text horizontally */
+    align-items: flex-start; /* Position text near the top */
+    text-align: center;
+    font-size: 2.5rem; /* Larger font size */
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif; /* Rounded modern font */
+    cursor: pointer;
+    height: 100%;
+    color: white; /* Default light color for text */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Shadow for better contrast */
     border-radius: 10px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    font-size: 2rem; /* Larger font size for readability */
-    font-weight: bold;
-    cursor: pointer;
     transition: transform 0.2s ease;
-    padding: 20px; /* Add some padding for better button size */
-    margin: 10px 0; /* Add spacing between buttons */
+    background-size: cover; /* Ensure image covers entire container */
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative; /* For overlay and text */
+    padding: 15px;
+  }
+
+  .dashboard-button span {
+    z-index: 1; /* Keep text on top */
+    margin-top: 20%; /* Position text 20% from the top */
+  }
+
+  .dashboard-button:nth-child(1) span {
+    color: #f9a825; /* Golden yellow for Diet & Nutrition */
+  }
+
+  .dashboard-button:nth-child(2) span {
+    color: #4caf50; /* Green for Wellness */
+  }
+
+  .dashboard-button:nth-child(3) span {
+    color: #2196f3; /* Blue for Habits */
+  }
+
+  .dashboard-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Overlay for better text contrast */
+    border-radius: 10px;
+    z-index: 0; /* Ensure overlay is below text */
   }
 
   .dashboard-button:hover {
@@ -80,109 +115,103 @@
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    flex: 1; /* Let the row take up available space */
+    flex: 1;
     width: 100%;
   }
 
-
   .dashboard-row .dashboard-button {
     flex: 1;
-    margin: 0;
   }
 
-  /* Sidebar styling */
-.sidebar {
-    position: fixed;
-    top: 0;
-    right: 0%; /* Hidden off-screen by default */
-    width: 40%;
-    height: 100%;
-    background-color: #3e1be9;
-    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
-    transform: translateX(100%);
-    transition: transform 0.3s ease, visibility 0s 0.3s;
-    visibility: hidden; /* Hidden by default */
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Push the logout button to the bottom */
-    padding: 20px;
-  }
-
-  .sidebar.active {
-    transform: translateX(0);
-    visibility: visible;
-    transition: transform 0.3s ease, visibility 0s 0s;
-  }
+  
+/* Dashboard container */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 98%;
+  height: 98vh;
+  margin: 1%;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Prevent content from spilling */
+}
 
 
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+/* Header styling */
+.dashboard-header {
+  display: flex;
+  justify-content: center; /* Center the title horizontally */
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  position: relative; /* Allow the account icon to be positioned independently */
+}
 
-  .sidebar ul li {
-    margin: 20px 0;
-    cursor: pointer;
-    font-size: 2rem;
-    color: #fff;
-    text-align: center;
-  }
+.dashboard-header h1 {
+  font-size: 3rem; /* Larger font size for emphasis */
+  font-weight: bold;
+}
 
-  .sidebar ul li:hover {
-    text-decoration: underline;
-  }
+.account-icon {
+  font-size: 2rem; /* Larger icon size */
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: absolute;
+  right: 0; /* Align icon to the far right */
+}
 
-  /* Logout button styling */
-  .logout-button {
-    font-size: 1.5rem;
-    background-color: transparent;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    padding: 10px;
-    transition: background-color 0.2s ease;
-  }
+/* Main content */
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1; /* Adjust height dynamically */
+  width: 100%;
+  max-width: 1200px;
+}
 
-  .logout-button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
+.dashboard-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 2rem; /* Larger font size for readability */
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  padding: 20px; /* Add some padding for better button size */
+  margin: 10px 0; /* Add spacing between buttons */
+}
 
-  /* Close Sidebar button */
-  .close-sidebar {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 2rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #fff;
-  }
+.dashboard-button:hover {
+  transform: scale(1.05);
+}
 
-  .close-sidebar:hover {
-    color: #ddd;
-  }
+.top {
+  height: 45%; /* Take up nearly half the height */
+  width: 100%;
+  margin-bottom: 20px; /* Increased spacing for aesthetics */
+}
+
+.dashboard-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex: 1; /* Let the row take up available space */
+  width: 100%;
+}
 
 
-  /* Overlay styling */
-  .sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0s 0.3s; /* Smooth transition */
-    z-index: 999; /* Below the sidebar */
-  }
-
-  .sidebar-overlay.active {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 0.3s ease, visibility 0s 0s; /* Immediate visibility */
-  }
+.dashboard-row .dashboard-button {
+  flex: 1;
+  margin: 0;
+}

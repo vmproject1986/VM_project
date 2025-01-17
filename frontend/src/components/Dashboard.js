@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom'; // Import NavLink
 import './Dashboard.css';
 import Sidebar from './Sidebar';
+import habitImage from '../assets/images/habit_image_DB.jpg';
+import wellnessImage from '../assets/images/wellness_image_DB.jpg';
+import foodImage from '../assets/images/food_image_DB.jpg';
 
 function Dashboard({ logout }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -27,14 +30,30 @@ function Dashboard({ logout }) {
       {/* Main Content */}
       <div className="dashboard-content">
         {/* Top container */}
-        <NavLink to="/food-dashboard" className="dashboard-button top">
-          Diet & Nutrition
+        <NavLink
+          to="/food-dashboard"
+          className="dashboard-button top"
+          style={{ backgroundImage: `url(${foodImage})` }}
+        >
+          <span>Diet & Nutrition</span>
         </NavLink>
 
         {/* Bottom row */}
         <div className="dashboard-row">
-          <div className="dashboard-button">Wellness</div>
-          <div className="dashboard-button">Habits</div>
+          <NavLink
+            to="/wellness-dashboard"
+            className="dashboard-button"
+            style={{ backgroundImage: `url(${wellnessImage})` }}
+          >
+            <span>Wellness (under construction)</span>
+          </NavLink>
+          <NavLink
+            to="/habit-dashboard"
+            className="dashboard-button"
+            style={{ backgroundImage: `url(${habitImage})` }}
+          >
+            <span>Habits (under construction)</span>
+          </NavLink>
         </div>
       </div>
 

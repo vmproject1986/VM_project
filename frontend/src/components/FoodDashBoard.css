@@ -52,20 +52,57 @@
   }
 
   .dashboard-button {
-    flex: 1; /* Ensures equal width for all buttons */
+    flex: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
+    justify-content: center; /* Keep text horizontally centered */
+    align-items: flex-start; /* Align text near the top */
+    text-align: center;
+    font-size: 2.5rem; /* Larger font size */
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif; /* Rounded, modern font */
+    cursor: pointer;
+    height: 100%;
+    color: #f8f8f8; /* Default light font color */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Improved text visibility */
     border-radius: 10px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    font-size: 1.8rem; /* Larger font size for bigger buttons */
-    font-weight: bold;
-    cursor: pointer;
     transition: transform 0.2s ease;
-    height: 100%; /* Ensure the buttons fill the row height */
+    background-size: cover; /* Ensure the image covers the entire container */
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative; /* Required for text overlay */
+    padding: 10px; /* Add padding around the text */
+  }
+
+  .dashboard-button span {
+    z-index: 1; /* Keep text on top of the image */
+    margin-top: 20%; /* Position text 20% from the top */
+    color: white; /* Default color */
+  }
+
+  .dashboard-button:nth-child(1) span {
+    color: #ffe082; /* A soft gold for Grocery Lists */
+  }
+
+  .dashboard-button:nth-child(2) span {
+    color: #aed581; /* A fresh green for Recipes */
+  }
+
+  .dashboard-button:nth-child(3) span {
+    color: #4fc3f7; /* A bright blue for Generate */
+  }
+
+  .dashboard-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Add a semi-transparent overlay for better contrast */
+    border-radius: 10px; /* Match the button border radius */
+    z-index: 0; /* Ensure the overlay is below the text */
   }
 
   .dashboard-button:hover {
@@ -73,13 +110,6 @@
   }
 
 
-  .dashboard-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none; /* Remove underline from NavLink */
-    color: inherit; /* Ensure text color matches the design */
-  }
 
   /* Back button container */
 .back-button-container {

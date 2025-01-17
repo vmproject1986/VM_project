@@ -12,6 +12,14 @@ import GroceryList from './pages/GroceryList';
 import Recipes from './pages/Recipes';
 import FoodDashBoard from './components/FoodDashBoard';
 import Sidebar from './components/Sidebar';
+import HabitDashBoard from './components/HabitDashBoard';
+import WellnessDashboard from './components/WellnessDashBoard';
+import UnderConstruction from './pages/UnderConstruction';
+import About from './pages/About';
+import Pricing from './pages/Pricing';
+import Resources from './pages/Resources';
+import Contact from './pages/Contact';
+
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -66,11 +74,18 @@ function App() {
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} loading={loading} />}>
           <Route path="/user-list" element={<UserList />} />
           <Route path="/dashboard" element={<Dashboard logout={logout} />} />
-          <Route path="/food-form" element={<FoodForm />} />
-          <Route path="/grocery-list" element={<GroceryList />} />
-          <Route path="/recipes" element={<Recipes />} />
+          <Route path="/food-form" element={<FoodForm logout={logout}/>} />
+          <Route path="/grocery-list" element={<GroceryList logout={logout}/>} />
+          <Route path="/recipes"  element={<Recipes logout={logout}/>} />
           <Route path="/food-dashboard" element={<FoodDashBoard logout={logout}/>} />
           <Route path="/sidebar" element={<Sidebar logout={logout} />} />
+          <Route path="/habit-dashboard" element={<HabitDashBoard logout={logout} />} />
+          <Route path="/wellness-dashboard" element={<WellnessDashboard logout={logout} />} />
+          <Route path="/under-construction" element={<UnderConstruction />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/resources" element={<Resources />} />
         </Route>
       </Routes>
     </Router>

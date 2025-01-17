@@ -8,7 +8,7 @@ from .views import (
     get_user_recipes,
     recipe_detail,
     list_api_responses,
-    generate_grocery_list
+    generate_grocery_list,
 )
 
 urlpatterns = [

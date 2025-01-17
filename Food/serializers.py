@@ -13,9 +13,14 @@ class GroceryListSerializer(serializers.ModelSerializer):
         return GroceryList.objects.create(user=user, **validated_data)
 
 class RecipeSerializer(serializers.ModelSerializer):
+    grocery_list_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Recipe
-        fields = ['id', 'grocery_list', 'name', 'ingredients', 'instructions', 'user_feedback']
+        fields = ['id', 'grocery_list', 'grocery_list_name', 'name', 'ingredients', 'instructions', 'user_feedback']
+
+    def get_grocery_list_name(self, obj):
+        return obj.grocery_list.name if obj.grocery_list else None
 
     def create(self, validated_data):
         # Automatically set the user from the request context

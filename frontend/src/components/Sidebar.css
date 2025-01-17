@@ -1,76 +1,95 @@
 /* Sidebar container styling */
 .sidebar {
-    position: fixed;
-    top: 0;
-    right: 0%;
-    width: 40%; /* Sidebar takes one-third of the screen */
-    height: 100%;
-    background-color: #cb1212;
-    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
-    transform: translateX(100%);
-    transition: transform 0.3s ease, visibility 0s 0.3s;
-    visibility: hidden;
-    z-index: 1000;
-  }
+  position: fixed;
+  top: 0;
+  right: 0%;
+  width: 40%; /* Sidebar takes 40% of the screen */
+  height: 100%;
+  background-color: rgba(33, 33, 33, 0.95); /* Very dark grey with slight transparency */
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.4);
+  transform: translateX(100%);
+  transition: transform 0.3s ease, visibility 0s 0.3s;
+  visibility: hidden;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content items horizontally */
+  justify-content: center; /* Center content items vertically */
+}
 
-  .sidebar.active {
-    transform: translateX(0);
-    visibility: visible;
-    transition: transform 0.3s ease, visibility 0s 0s;
-  }
+.sidebar.active {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform 0.3s ease, visibility 0s 0s;
+}
 
-  .sidebar ul {
-    list-style: none;
-    padding: 20px;
-  }
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center; /* Center text alignment */
+}
 
-  .sidebar ul li {
-    margin: 20px 0;
-    cursor: pointer;
-    font-size: 1.2rem;
-  }
+.sidebar ul li {
+  margin: 30px 0; /* Increased padding between items */
+  cursor: pointer;
+  font-size: 1.5rem; /* Larger font size */
+  color: #f5f5f5; /* Pleasant white for good contrast */
+  font-family: 'Arial', sans-serif; /* Ensure font consistency */
+}
 
-  .sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0s 0.3s;
-    z-index: 999;
-  }
+.sidebar ul li:hover {
+  color: #d9d9d9; /* Slightly lighter on hover */
+}
 
-  .sidebar-overlay.active {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 0.3s ease, visibility 0s 0s;
-  }
+.sidebar p {
+  font-size: 1.2rem; /* Slightly smaller than the menu items */
+  color: #f5f5f5; /* Matches the menu items */
+  margin-top: 10px; /* Space above the message */
+  font-family: 'Arial', sans-serif;
+}
 
-  .close-sidebar {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: white;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); /* Darkened overlay */
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0s 0.3s;
+  z-index: 999;
+}
 
-  .logout-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: white;
-    color: #cb1212;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
+.sidebar-overlay.active {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease, visibility 0s 0s;
+}
 
-  .logout-button:hover {
-    background-color: #ffdddd;
-  }
+.close-sidebar {
+  background: none;
+  border: none;
+  font-size: 2rem; /* Larger close button for better accessibility */
+  cursor: pointer;
+  color: #f5f5f5; /* Matches the sidebar text color */
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.logout-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #f5f5f5; /* White for a clean look */
+  color: rgba(33, 33, 33, 0.95); /* Match the sidebar background */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem; /* Slightly larger font */
+}
+
+.logout-button:hover {
+  background-color: #e0e0e0; /* Light grey on hover */
+}

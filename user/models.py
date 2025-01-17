@@ -13,7 +13,7 @@ class Profile(models.Model):
     preferred_foods = models.TextField(blank=True, null=True)
     lifestyle = models.TextField(blank=True, null=True)
     health_goals = models.TextField(blank=True, null=True)
-    budget = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    budget = models.TextField(blank=True, null=True)
     additional_info = models.TextField(blank=True, null=True)
 
     # New target goals for Wellness app

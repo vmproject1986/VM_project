@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import API from '../api';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import Sidebar from '../components/Sidebar'; // Import Sidebar component
 import { jwtDecode } from 'jwt-decode'; // Import jwt-decode for decoding the token
-import './SharedPageStyles.css';
+import './FoodForm.css';
 
-function FoodForm() {
+function FoodForm({ logout }) {
   const [formData, setFormData] = useState({
     allergies: '',
     dietary_restrictions: '',
@@ -17,8 +18,9 @@ function FoodForm() {
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
-  const [dropdownData, setDropdownData] = useState(null); // For dropdown content
-  const [dropdownVisible, setDropdownVisible] = useState(false); // Controls dropdown visibility
+  const [success, setSuccess] = useState(false); // Track if response was successful
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Track sidebar state
+  const navigate = useNavigate();
 
   // Function to get user ID from the token
   const getUserIdFromToken = () => {
@@ -35,6 +37,38 @@ function FoodForm() {
     return null;
   };
 
+  // Fetch user preferences on component load
+  useEffect(() => {
+    const fetchPreferences = async () => {
+      const userId = getUserIdFromToken();
+      if (!userId) return;
+
+      try {
+        const response = await API.get(`/user/${userId}/`);
+        const profile = response.data.profile || {};
+        // Populate form fields with user preferences or leave blank if null
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          ...Object.fromEntries(
+            Object.entries(profile).map(([key, value]) => [key, value || ''])
+          ),
+        }));
+      } catch (err) {
+        console.error('Error fetching user preferences:', err);
+      }
+    };
+
+    fetchPreferences();
+  }, []); // Run only once on component mount
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -44,7 +78,7 @@ function FoodForm() {
     e.preventDefault();
     setLoading(true);
     setMessage('');
-    setDropdownVisible(false); // Hide dropdown initially
+    setSuccess(false); // Reset success state
 
     const userId = getUserIdFromToken();
     if (!userId) {
@@ -64,18 +98,16 @@ function FoodForm() {
       setMessage('Preferences updated successfully!');
 
       // Step 2: Trigger OpenAI API call to generate data
-      const response = await API.post('/food/generate-grocery-list/', {
-        prompt: `Generate a weekly grocery list, followed by recipes based on that list. The grocery list should be labeled 'Grocery List:'. Each recipe should be labeled 'Recipe:'. Each recipe should include a name, ingredients, and instructions.  If any of the following details are included, prioritize the grocery list around them: ${JSON.stringify(
+      await API.post('/food/generate-grocery-list/', {
+        prompt: `Generate a weekly grocery list, followed by recipes based on that list. The grocery list should be labeled 'Grocery List:'. Each recipe should be labeled 'Recipe:'. Each recipe should include a name, ingredients, and instructions. If any of the following details are included, prioritize the grocery list around them: ${JSON.stringify(
           filteredData
         )}`,
       });
 
-      console.log('OpenAI Response:', response.data);
-      setDropdownData(response.data); // Save response for dropdown
-      setDropdownVisible(true); // Show dropdown
+      setSuccess(true); // Mark response as successful
       setMessage('Grocery List and Recipes generated successfully!');
     } catch (err) {
-      console.error('Error updating preferences:', err);
+      console.error('Error updating preferences or generating data:', err);
       setMessage('Failed to update preferences or generate data. Please try again later.');
     } finally {
       setLoading(false);
@@ -83,9 +115,18 @@ function FoodForm() {
   };
 
   return (
-    <div className="page-container">
-      <h2 className="page-title">Update Your Preferences</h2>
-      <NavLink to="/food-dashboard" className="back-to-menu-button">
+    <div className="food-form-container">
+      {/* Sidebar */}
+      <Sidebar isSidebarOpen={isSidebarOpen} closeSidebar={closeSidebar} logout={logout} />
+
+      {/* Header */}
+      <div className="dashboard-header">
+        <h1>Food Preferences</h1>
+        <button className="account-icon" onClick={toggleSidebar}>
+          ☰
+        </button>
+      </div>
+      <NavLink to="/food-dashboard" className="back-button">
         Back to Food Ecosystem
       </NavLink>
       <form onSubmit={handleSubmit}>
@@ -103,47 +144,21 @@ function FoodForm() {
             />
           </div>
         ))}
-        <button type="submit" className="btn btn-primary" disabled={loading}>
+        <button type="submit" className="submit-button" disabled={loading}>
           {loading ? 'Submitting...' : 'Generate Grocery List & Recipes'}
         </button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <p className="form-message">{message}</p>}
 
-      {/* Conditionally render dropdown */}
-      {dropdownVisible && dropdownData && (
-  <div className="dropdown-container">
-    <h3>Generated Content:</h3>
-    <div>
-      <h4>Grocery List</h4>
-      <ul>
-        {dropdownData.items
-          ? dropdownData.items
-              .split('\n') // Split the items by newline
-              .filter((line) => line.trim() && !line.includes('Grocery List:')) // Remove empty lines and title
-              .map((item, index) => <li key={index}>{item.trim()}</li>)
-          : <li>No grocery list generated.</li>}
-      </ul>
-    </div>
-    <div>
-      <h4>Recipes</h4>
-      <ul>
-        {dropdownData.recipes && dropdownData.recipes.length > 0 ? (
-          dropdownData.recipes.map((recipe, index) => (
-            <li key={index}>
-              <h5>{recipe.title || 'Unnamed Recipe'}</h5>
-              <p>{recipe.ingredients || 'No ingredients provided.'}</p>
-              <p>{recipe.instructions || 'No instructions provided.'}</p>
-            </li>
-          ))
-        ) : (
-          <li>No recipes generated.</li>
-        )}
-      </ul>
-    </div>
-  </div>
-)}
-
-
+      {/* Conditionally render the "See New Grocery List" button */}
+      {success && (
+        <button
+          className="see-list-button"
+          onClick={() => navigate('/grocery-list')}
+        >
+          See New Grocery List
+        </button>
+      )}
     </div>
   );
 }
