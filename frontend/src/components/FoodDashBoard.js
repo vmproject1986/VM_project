@@ -57,7 +57,7 @@ function FoodDashboard({ logout }) {
             className="dashboard-button"
             style={{ backgroundImage: `url(${generateImage})` }}
           >
-            <span>Generate Grocery List and Recipes</span>
+            <span>Generate New List</span>
           </NavLink>
         </div>
       </div>

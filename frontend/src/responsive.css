@@ -1,0 +1,141 @@
+/* Base Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    font-size: 14px; /* Base font size for mobile */
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+#root {
+    height: 100%;
+    overflow: auto; /* Ensure the root allows scrolling */
+  }
+
+*, *::before, *::after {
+    box-sizing: inherit; /* Ensure consistent sizing */
+}
+
+.container {
+    max-width: 100%;
+    padding: 10px; /* Add padding for spacing */
+    margin: 0 auto;
+}
+
+h1, h2, h3 {
+    font-size: 1.5rem; /* Scale down headers */
+    text-align: center; /* Center-align headers for mobile */
+    margin: 0 0 10px;
+}
+
+/* Sidebar Responsive Adjustments */
+.sidebar {
+    width: 70%; /* Reduced width for mobile */
+    max-height: 100vh; /* Prevent overflow */
+    overflow-y: auto; /* Enable scrolling for long content */
+    padding: 15px; /* Add padding */
+    background-color: rgba(33, 33, 33, 0.95); /* Maintain dark background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Cards (e.g., Recipes, Grocery Lists) */
+.card {
+    width: 100%; /* Full width for mobile */
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+/* Buttons */
+.submit-button,
+.feedback-button {
+    width: 100%; /* Full width for better touch accessibility */
+    font-size: 1rem; /* Adjusted for mobile */
+    padding: 10px 0; /* Larger touch targets */
+    border: none;
+    border-radius: 5px;
+    background-color: #0056b3; /* Consistent blue */
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover,
+.feedback-button:hover {
+    background-color: #003f7f; /* Darker hover state */
+    transform: translateY(-2px);
+}
+
+/* Header Styling */
+.dashboard-header {
+    display: flex;
+    justify-content: center; /* Center the title horizontally */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative; /* For account icon positioning */
+}
+
+.dashboard-header h1 {
+    font-size: 2rem; /* Reduced size for mobile */
+    font-weight: bold;
+}
+
+.account-icon {
+    font-size: 2rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: absolute;
+    right: 10px; /* Align icon to the far right */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .form-group input,
+    .form-group textarea {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .submit-button {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+
+    .sidebar ul li {
+        font-size: 1.2rem; /* Slightly smaller text for mobile */
+    }
+
+    .card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.8rem; /* Adjusted for medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    h1, h2, h3 {
+        font-size: 1.2rem; /* Smaller font for very small screens */
+    }
+
+    .container {
+        padding: 5px; /* Reduce padding on smaller screens */
+    }
+
+    .feedback-button,
+    .submit-button {
+        font-size: 0.9rem; /* Slightly smaller for compact screens */
+        padding: 8px 10px;
+    }
+}

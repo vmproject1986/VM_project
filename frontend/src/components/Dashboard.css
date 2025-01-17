@@ -1,217 +1,165 @@
-/* Dashboard container */
-.dashboard-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 98%;
-    height: 98vh;
-    margin: 1%;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Prevent content from spilling */
-  }
+/* General Cleanup and Adjustments */
 
-
-  /* Header styling */
-  .dashboard-header {
-    display: flex;
-    justify-content: center; /* Center the title horizontally */
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
-    position: relative; /* Allow the account icon to be positioned independently */
-  }
-
-  .dashboard-header h1 {
-    font-size: 3rem; /* Larger font size for emphasis */
-    font-weight: bold;
-  }
-
-  .account-icon {
-    font-size: 2rem; /* Larger icon size */
-    border: none;
-    background: none;
-    cursor: pointer;
-    position: absolute;
-    right: 0; /* Align icon to the far right */
-  }
-
-  /* Main content */
-  .dashboard-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1; /* Adjust height dynamically */
-    width: 100%;
-    max-width: 1200px;
-  }
-
-  .dashboard-button {
-    display: flex;
-    justify-content: center; /* Center text horizontally */
-    align-items: flex-start; /* Position text near the top */
-    text-align: center;
-    font-size: 2.5rem; /* Larger font size */
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif; /* Rounded modern font */
-    cursor: pointer;
-    height: 100%;
-    color: white; /* Default light color for text */
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); /* Shadow for better contrast */
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-    background-size: cover; /* Ensure image covers entire container */
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative; /* For overlay and text */
-    padding: 15px;
-  }
-
-  .dashboard-button span {
-    z-index: 1; /* Keep text on top */
-    margin-top: 20%; /* Position text 20% from the top */
-  }
-
-  .dashboard-button:nth-child(1) span {
-    color: #f9a825; /* Golden yellow for Diet & Nutrition */
-  }
-
-  .dashboard-button:nth-child(2) span {
-    color: #4caf50; /* Green for Wellness */
-  }
-
-  .dashboard-button:nth-child(3) span {
-    color: #2196f3; /* Blue for Habits */
-  }
-
-  .dashboard-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* Overlay for better text contrast */
-    border-radius: 10px;
-    z-index: 0; /* Ensure overlay is below text */
-  }
-
-  .dashboard-button:hover {
-    transform: scale(1.05);
-  }
-
-  .top {
-    height: 45%; /* Take up nearly half the height */
-    width: 100%;
-    margin-bottom: 20px; /* Increased spacing for aesthetics */
-  }
-
-  .dashboard-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex: 1;
-    width: 100%;
-  }
-
-  .dashboard-row .dashboard-button {
-    flex: 1;
-  }
-
-  
 /* Dashboard container */
 .dashboard-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  width: 98%;
-  height: 98vh;
-  margin: 1%;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
   background-color: #f8f9fa;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Prevent content from spilling */
+  overflow-y: auto;
 }
-
 
 /* Header styling */
 .dashboard-header {
   display: flex;
-  justify-content: center; /* Center the title horizontally */
+  justify-content: center;
   align-items: center;
   width: 100%;
   margin-bottom: 20px;
-  position: relative; /* Allow the account icon to be positioned independently */
+  position: relative;
 }
 
 .dashboard-header h1 {
-  font-size: 3rem; /* Larger font size for emphasis */
+  font-size: 3rem;
   font-weight: bold;
 }
 
 .account-icon {
-  font-size: 2rem; /* Larger icon size */
+  font-size: 2rem;
   border: none;
   background: none;
   cursor: pointer;
   position: absolute;
-  right: 0; /* Align icon to the far right */
+  right: 0;
 }
 
 /* Main content */
 .dashboard-content {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1; /* Adjust height dynamically */
+  gap: 20px; /* Space between rows */
   width: 100%;
   max-width: 1200px;
 }
 
-.dashboard-button {
+/* Top container (Diet & Nutrition) */
+.top {
+  width: 100%; /* Full width of the row */
+  height: 50vh; /* Half the viewport height */
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   background-color: #ffffff;
   border-radius: 10px;
   border: 1px solid #ddd;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  font-size: 2rem; /* Larger font size for readability */
-  font-weight: bold;
-  cursor: pointer;
   transition: transform 0.2s ease;
-  padding: 20px; /* Add some padding for better button size */
-  margin: 10px 0; /* Add spacing between buttons */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
 
-.dashboard-button:hover {
+.top span {
+  z-index: 1;
+  color: #f9a825;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  z-index: 0;
+}
+
+.top:hover {
   transform: scale(1.05);
 }
 
-.top {
-  height: 45%; /* Take up nearly half the height */
-  width: 100%;
-  margin-bottom: 20px; /* Increased spacing for aesthetics */
-}
-
+/* Dashboard row (Wellness and Habits) */
 .dashboard-row {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
-  flex: 1; /* Let the row take up available space */
+  gap: 20px; /* Space between buttons */
   width: 100%;
+  height: calc(50vh - 20px); /* Match the height of the top container */
 }
 
-
 .dashboard-row .dashboard-button {
-  flex: 1;
-  margin: 0;
+  flex: 1; /* Equal width for both buttons */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  color: #ffffff;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.dashboard-row .dashboard-button span {
+  z-index: 1;
+  font-size: 1.8rem;
+}
+
+.dashboard-row .dashboard-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  z-index: 0;
+}
+
+.dashboard-row .dashboard-button:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .dashboard-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .top {
+    height: 40vh; /* Adjust top container height */
+  }
+
+  .dashboard-row {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .dashboard-row .dashboard-button {
+    margin-bottom: 20px;
+    height: 40vh; /* Adjust bottom buttons for smaller screens */
+  }
 }

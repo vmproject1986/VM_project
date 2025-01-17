@@ -1,54 +1,96 @@
 /* Sidebar container styling */
-.sidebar {
-  position: fixed;
-  top: 0;
-  right: 0%;
-  width: 40%; /* Sidebar takes 40% of the screen */
-  height: 100%;
-  background-color: rgba(33, 33, 33, 0.95); /* Very dark grey with slight transparency */
-  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.4);
-  transform: translateX(100%);
-  transition: transform 0.3s ease, visibility 0s 0.3s;
-  visibility: hidden;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center content items horizontally */
-  justify-content: center; /* Center content items vertically */
+/* Ensure Sidebar always acts the same */
+body .sidebar {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 75% !important;
+  height: 100% !important;
+  background-color: rgba(33, 33, 33, 0.95) !important;
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.4) !important;
+  transform: translateX(100%) !important;
+  visibility: hidden !important;
+  z-index: 1000 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  overflow-y: auto !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
 }
 
-.sidebar.active {
-  transform: translateX(0);
-  visibility: visible;
-  transition: transform 0.3s ease, visibility 0s 0s;
+body .sidebar.active {
+  transform: translateX(0) !important;
+  visibility: visible !important;
+  scroll-behavior: smooth !important;
 }
 
+
+/* Sidebar list */
 .sidebar ul {
   list-style: none;
   padding: 0;
   margin: 0;
   text-align: center; /* Center text alignment */
+  width: 100%; /* Ensure full width for scrolling */
 }
 
+/* Sidebar items */
 .sidebar ul li {
-  margin: 30px 0; /* Increased padding between items */
+  margin: 30px 0; /* Add spacing between items */
   cursor: pointer;
   font-size: 1.5rem; /* Larger font size */
   color: #f5f5f5; /* Pleasant white for good contrast */
   font-family: 'Arial', sans-serif; /* Ensure font consistency */
+  word-wrap: break-word; /* Handle long text */
 }
 
+/* Hover effect for items */
 .sidebar ul li:hover {
   color: #d9d9d9; /* Slightly lighter on hover */
 }
 
-.sidebar p {
-  font-size: 1.2rem; /* Slightly smaller than the menu items */
-  color: #f5f5f5; /* Matches the menu items */
-  margin-top: 10px; /* Space above the message */
-  font-family: 'Arial', sans-serif;
+/* Dropdown container */
+.dropdown {
+  position: relative; /* Position relative to its parent */
+  max-height: 50vh; /* Limit dropdown height to prevent overflow */
+  overflow-y: auto; /* Enable vertical scrolling for content */
+  width: 100%; /* Ensure the dropdown takes the full width */
+  background-color: rgba(33, 33, 33, 0.95); /* Match sidebar styling */
+  border-radius: 5px; /* Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Add shadow for depth */
+  padding: 15px; /* Add some padding for content */
+  margin-top: 10px; /* Space between the dropdown and its trigger */
+  z-index: 1100; /* Ensure it's above other elements */
 }
 
+/* Dropdown content styling */
+.dropdown > * {
+  margin-bottom: 10px; /* Add spacing between items */
+  color: #f5f5f5; /* White text for good contrast */
+  font-size: 1.2rem; /* Slightly larger font size for readability */
+}
+
+.dropdown > *:last-child {
+  margin-bottom: 0; /* Remove bottom margin for the last item */
+}
+
+/* Scrollbar styling */
+.dropdown::-webkit-scrollbar {
+  width: 8px; /* Narrow scrollbar width */
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3); /* Light scrollbar thumb */
+  border-radius: 4px; /* Rounded scrollbar */
+}
+
+.dropdown::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.5); /* Darker thumb on hover */
+}
+
+/* Sidebar overlay */
 .sidebar-overlay {
   position: fixed;
   top: 0;
@@ -62,12 +104,14 @@
   z-index: 999;
 }
 
+/* Active Sidebar Overlay */
 .sidebar-overlay.active {
   visibility: visible;
   opacity: 1;
   transition: opacity 0.3s ease, visibility 0s 0s;
 }
 
+/* Close Sidebar Button */
 .close-sidebar {
   background: none;
   border: none;
@@ -79,6 +123,7 @@
   right: 15px;
 }
 
+/* Logout Button */
 .logout-button {
   margin-top: 20px;
   padding: 12px 24px;
@@ -92,43 +137,4 @@
 
 .logout-button:hover {
   background-color: #e0e0e0; /* Light grey on hover */
-}
-
-
-.sidebar ul li.feedback-button {
-  background-color: #0056b3; /* Blue background for the Feedback button */
-  color: #fff; /* White text for contrast */
-  padding: 10px 20px; /* Add padding for button-like appearance */
-  border-radius: 5px; /* Rounded corners */
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  text-align: center;
-}
-
-.sidebar ul li.feedback-button:hover {
-  background-color: #003f7f; /* Darker blue on hover */
-  transform: translateY(-2px); /* Lift on hover */
-  color: #f5f5f5; /* Slightly lighter text on hover for clarity */
-}
-
-.feedback-button {
-  background-color: #0056b3; /* Blue background */
-  color: #fff; /* White text for good contrast */
-  padding: 10px 20px; /* Padding for a button-like feel */
-  border: none; /* Remove the default border */
-  border-radius: 5px; /* Rounded corners */
-  font-size: 1.2rem; /* Larger font size */
-  cursor: pointer; /* Pointer cursor to indicate clickable button */
-  text-align: center; /* Center-align the text */
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
-}
-
-.feedback-button:hover {
-  background-color: #003f7f; /* Darker blue on hover */
-  transform: translateY(-2px); /* Slight lift effect on hover */
-}
-
-.feedback-button:focus {
-  outline: none; /* Remove the default focus outline */
-  box-shadow: 0 0 6px rgba(0, 86, 179, 0.5); /* Glow effect for focus */
 }

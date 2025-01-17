@@ -1,50 +1,90 @@
 .landing-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content at the top */
+  height: auto; /* Allow height to adjust based on content */
+  min-height: 100vh; /* Ensure it takes at least full screen height */
+  padding: 20px; /* Add padding for better spacing */
+  text-align: center;
+  overflow-y: auto; /* Enable scrolling if content overflows */
+  box-sizing: border-box; /* Include padding in height calculation */
+}
 
+.welcome-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically for smaller screens */
+  gap: 15px;
+  margin-top: 20px; /* Add space from the title */
+}
+
+.nav-button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%; /* Make buttons full width for consistency */
+  max-width: 300px; /* Limit button width for larger screens */
+}
+
+.nav-button:hover {
+  background-color: #0056b3;
+}
+
+.explanation-message {
+  font-size: 1.1rem;
+  margin-top: 15px;
+  color: #555;
+}
+
+.click-here {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.explanation-text {
+  margin-top: 15px;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
   .welcome-title {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
-
-  .button-container {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
+    font-size: 2rem; /* Scale down title for smaller screens */
   }
 
   .nav-button {
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    text-decoration: none;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .nav-button:hover {
-    background-color: #0056b3;
+    font-size: 1rem; /* Adjust button font size */
+    padding: 8px 15px; /* Adjust padding for smaller screens */
   }
 
   .explanation-message {
-    font-size: 1.1rem;
+    font-size: 1rem; /* Adjust explanation message font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-title {
+    font-size: 1.8rem; /* Further scale down title */
   }
 
-  .click-here {
-    color: blue;
-    text-decoration: underline;
-    cursor: pointer;
+  .nav-button {
+    font-size: 0.9rem;
+    padding: 6px 12px;
   }
 
-  .explanation-text {
-    margin-top: 15px;
-    font-size: 1rem;
-    color: #555;
+  .explanation-message {
+    font-size: 0.9rem;
   }
+}

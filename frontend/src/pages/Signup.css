@@ -1,11 +1,15 @@
 .signup-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content at the top */
+  height: auto; /* Allow height to adjust based on content */
+  min-height: 100vh; /* Ensure it takes at least full screen height */
+  padding: 20px; /* Add padding for better spacing */
+  text-align: center;
+  overflow-y: auto; /* Enable scrolling if content overflows */
+  box-sizing: border-box; /* Include padding in height calculation */
+}
 
   .signup-title {
     font-size: 2.5rem;
@@ -19,6 +23,7 @@
     width: 100%;
     max-width: 400px;
     gap: 15px;
+    margin-top: 20px; /* Add space from the title */
   }
 
   .form-group {
