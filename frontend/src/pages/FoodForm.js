@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar'; // Import Sidebar component
 import { jwtDecode } from 'jwt-decode'; // Import jwt-decode for decoding the token
 import './FoodForm.css';
+import logoImage from '../assets/images/Logo.png';
 
 function FoodForm({ logout }) {
   const [formData, setFormData] = useState({
@@ -36,6 +37,13 @@ function FoodForm({ logout }) {
     }
     return null;
   };
+
+  useEffect(() => {
+      document.body.className = 'food-app';
+      return () => {
+        document.body.className = ''; // Cleanup on component unmount
+      };
+    }, []);
 
   // Fetch user preferences on component load
   useEffect(() => {
@@ -121,8 +129,8 @@ function FoodForm({ logout }) {
 
       {/* Header */}
       <div className="dashboard-header">
-        <button className="account-icon" onClick={toggleSidebar} aria-label="Toggle Sidebar">
-          ☰
+        <button className="account-icon" onClick={toggleSidebar}>
+          <img src={logoImage} alt="Account" className="account-logo" />
         </button>
       </div>
 
@@ -174,7 +182,7 @@ function FoodForm({ logout }) {
         {loading ? 'Submitting...' : 'Generate Grocery List & Recipes'}
       </button>
     </form>
-    
+
     </div>
   );
 

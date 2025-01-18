@@ -1,17 +1,19 @@
+/* FoodForm CSS */
+
 .food-form-container {
-  position: relative; /* Make the container the reference for the overlay */
+  position: relative; /* Reference point for overlays */
   max-width: 700px;
   margin: 0 auto;
   text-align: center;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); /* Stronger shadow for better depth */
-  background-image: url('../assets/images/food_background.png'); /* Path to your image */
-  background-size: cover; /* Ensures the image covers the entire viewport */
-  background-position: center; /* Centers the image */
-  background-repeat: no-repeat; /* Prevents tiling */
-  font-family: 'Poppins', sans-serif; /* Ensure consistent font styling */
-  color: white; /* Default text color for the container */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); /* Depth effect */
+  background-image: url('../assets/images/food_background.png'); /* Path to background image */
+  background-size: cover; /* Fill the entire container */
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Poppins', sans-serif;
+  color: white; /* Default text color */
 }
 
 .food-form-container::before {
@@ -21,82 +23,61 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white overlay */
-  border-radius: 10px; /* Match the container's border-radius */
-  z-index: 1; /* Ensure it sits behind the form content */
+  background-color: rgba(0, 0, 0, 0.6); /* Black overlay */
+  border-radius: 10px;
+  z-index: 1; /* Ensure it appears behind form content */
 }
 
 .food-form-container > * {
-  position: relative; /* Ensure content sits above the overlay */
+  position: relative; /* Stack on top of overlay */
   z-index: 2;
 }
 
-.dashboard-header h1, .form-title {
-  font-size: 2rem;
-  margin-bottom: 25px; /* Add space between title and first form element */
-  color: white; /* White title text */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Text shadow for better visibility */
-  border-bottom: 0;
-}
-
 label {
-  text-align: center;
   display: block;
-  width: 100%;
-  margin-bottom: 10px; /* Add some space below the label */
-  color: rgb(0, 0, 0); /* Ensure legibility */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Shadow for better visibility */
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: white; /* Ensure labels are readable */
 }
 
 input {
   width: 100%;
   padding: 12px;
   font-size: 1rem;
-  border: 1px solid #aaa; /* Darker border for more defined input fields */
+  border: 1px solid #aaa;
   border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.8); /* Light background for contrast */
-  color: #000; /* Dark text for readability within inputs */
-  margin-bottom: 20px; /* Increase spacing below the input field */
+  background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+  color: #000; /* Dark text */
+  margin-bottom: 20px;
 }
 
 input:focus {
-  border-color: #0056b3; /* Highlight color for focus */
+  border-color: #0056b3;
   outline: none;
-  box-shadow: 0 0 6px rgba(0, 86, 179, 0.5); /* Glow effect for focus */
-}
-
-.form-group {
-  margin-bottom: 30px; /* Add consistent spacing between input groups */
+  box-shadow: 0 0 6px rgba(0, 86, 179, 0.5);
 }
 
 .submit-button {
   padding: 12px 20px;
   font-size: 1.2rem;
-  color: white; /* White text for the button */
-  background-color: #0056b3;
+  color: white;
+  background-color: rgba(0, 123, 255, 0.8) !important; /* Matching blue theme */
   border: none;
-  border-radius: 5px;
+  border-radius: 50px !important; /* Fully rounded button */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 20px;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  margin-top: 20px; /* Spacing above the button */
 }
 
 .submit-button:disabled {
-  background-color: #999999;
+  background-color: rgba(153, 153, 153, 0.6); /* Transparent gray for disabled state */
   cursor: not-allowed;
 }
 
 .submit-button:hover {
-  background-color: #003f7f; /* Darker hover state */
+  background-color: rgba(0, 86, 179, 0.8) !important; /* Darker blue on hover */
   transform: translateY(-2px);
-}
-
-.form-message {
-  margin-top: 15px;
-  color: white; /* White text for form messages */
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Text shadow for better visibility */
 }
 
 .back-button {
@@ -104,15 +85,63 @@ input:focus {
   margin-bottom: 20px;
   padding: 10px 15px;
   font-size: 1rem;
-  color: white; /* White text for the back button */
-  background-color: #0056b3; /* Match button color */
+  color: white;
+  background-color: rgba(0, 123, 255, 0.8) !important; /* Slight transparency */
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 50px !important; /* Fully rounded button */
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
 }
 
 .back-button:hover {
-  background-color: #003f7f;
+  background-color: rgba(0, 86, 179, 0.8) !important; /* Darker blue on hover */
   transform: translateY(-2px);
+}
+
+.form-group {
+  margin-bottom: 30px;
+}
+
+.form-message {
+  margin-top: 15px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Adjustments for See Grocery List button */
+.see-list-button {
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  color: white;
+  background-color: rgba(40, 167, 69, 0.8) !important; /* Green theme with slight transparency */
+  border: none;
+  border-radius: 50px !important; /* Fully rounded button */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px; /* Add spacing below the button */
+}
+
+.see-list-button:hover {
+  background-color: rgba(33, 136, 56, 0.9) !important; /* Darker green on hover */
+  transform: translateY(-2px);
+}
+
+/* Consistency with other components */
+.food-form-container .form-control {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .food-form-container {
+    padding: 20px;
+  }
+  .submit-button {
+    font-size: 1rem;
+  }
+  .see-list-button {
+    font-size: 1rem;
+  }
 }

@@ -11,7 +11,7 @@ html, body, #root {
 
 /* Shared background styles */
 .home-screens {
-  background-image: url('./assets/images/main_background_with_logo.png');
+  background-image: url('./assets/images/Logo.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

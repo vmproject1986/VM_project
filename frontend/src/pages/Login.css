@@ -1,19 +1,20 @@
+/* Updated Login CSS */
+
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align content at the top */
-  height: auto; /* Allow height to adjust based on content */
-  min-height: 100vh; /* Ensure it takes at least full screen height */
+  justify-content: center; /* Center content vertically */
+  height: 100vh; /* Full viewport height */
   padding: 20px; /* Add padding for better spacing */
   text-align: center;
-  overflow-y: auto; /* Enable scrolling if content overflows */
   box-sizing: border-box; /* Include padding in height calculation */
 }
 
 .login-title {
   font-size: 2.5rem;
   margin-bottom: 20px;
+  color: black; /* Change title font color to black */
 }
 
 .login-form {
@@ -23,7 +24,6 @@
   width: 100%;
   max-width: 400px;
   gap: 15px;
-  margin-top: 20px; /* Add space from the title */
 }
 
 .form-group {
@@ -36,7 +36,14 @@ label {
   margin-bottom: 5px;
   font-size: 1.1rem;
   text-align: left;
+  color: black; /* Ensure label font color is black */
 }
+
+/* Specifically target Bootstrap form labels if necessary */
+.login-form label {
+  color: black;
+}
+
 
 input {
   padding: 10px;
@@ -66,6 +73,35 @@ input {
   font-size: 1rem;
   margin-bottom: 10px;
 }
+
+.signup-section {
+  margin-top: 20px; /* Add spacing above the section */
+  text-align: center;
+}
+
+.signup-text {
+  color: black; /* Change text color to black */
+  margin-bottom: 10px; /* Add spacing below the text */
+  font-size: 1.1rem; /* Adjust font size */
+}
+
+.signup-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none; /* Remove underline */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+  background-color: #0056b3;
+}
+
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {

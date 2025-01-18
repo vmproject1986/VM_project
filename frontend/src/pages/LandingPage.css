@@ -1,26 +1,25 @@
-
+/* Updated Landing Page CSS */
 
 .landing-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align content at the top */
-  height: auto; /* Allow height to adjust based on content */
-  min-height: 100vh; /* Ensure it takes at least full screen height */
+  justify-content: center; /* Center content vertically */
+  height: 100vh; /* Full viewport height */
   padding: 20px; /* Add padding for better spacing */
   text-align: center;
-  overflow-y: auto; /* Enable scrolling if content overflows */
   box-sizing: border-box; /* Include padding in height calculation */
 }
 
 .welcome-title {
   font-size: 2.5rem;
   margin-bottom: 20px;
+  color: black; /* Change title font color to black */
 }
 
 .button-container {
   display: flex;
-  flex-direction: column; /* Stack buttons vertically for smaller screens */
+  flex-direction: column; /* Stack buttons vertically */
   gap: 15px;
   margin-top: 20px; /* Add space from the title */
 }
@@ -45,7 +44,7 @@
 .explanation-message {
   font-size: 1.1rem;
   margin-top: 15px;
-  color: #555;
+  color: black; /* Change text color to black */
 }
 
 .click-here {
@@ -57,7 +56,12 @@
 .explanation-text {
   margin-top: 15px;
   font-size: 1rem;
-  color: #555;
+  color: black; /* Change text color to black */
+}
+
+label {
+  color: rgb(0, 0, 0); /* Ensure label text is black */
+  font-weight: bold;
 }
 
 /* Responsive Adjustments */

@@ -1,68 +1,102 @@
+/* Updated Signup Page CSS */
+
 .signup-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align content at the top */
-  height: auto; /* Allow height to adjust based on content */
-  min-height: 100vh; /* Ensure it takes at least full screen height */
+  justify-content: center; /* Center content vertically */
+  height: 100vh; /* Full viewport height */
   padding: 20px; /* Add padding for better spacing */
   text-align: center;
-  overflow-y: auto; /* Enable scrolling if content overflows */
   box-sizing: border-box; /* Include padding in height calculation */
 }
 
+.signup-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: rgb(255, 255, 255); /* Change title font color to black */
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  gap: 15px;
+  margin-top: 20px; /* Add space from the title */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+label {
+  margin-bottom: 5px;
+  font-size: 2.5rem;
+  text-align: left;
+  color: black; /* Ensure label text is black */
+  font-weight: bold;
+}
+
+input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.signup-button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.signup-button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
   .signup-title {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
-
-  .signup-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 400px;
-    gap: 15px;
-    margin-top: 20px; /* Add space from the title */
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  label {
-    margin-bottom: 5px;
-    font-size: 1.1rem;
-    text-align: left;
-  }
-
-  input {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
+    font-size: 2rem; /* Scale down title for smaller screens */
   }
 
   .signup-button {
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
+    font-size: 1rem; /* Adjust button font size */
+    padding: 8px 15px; /* Adjust padding for smaller screens */
   }
 
-  .signup-button:hover {
-    background-color: #0056b3;
+  .form-group label {
+    font-size: 1rem; /* Adjust label font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .signup-title {
+    font-size: 1.8rem; /* Further scale down title */
   }
 
-  .error-message {
-    color: red;
-    font-size: 1rem;
-    margin-bottom: 10px;
+  .signup-button {
+    font-size: 0.9rem;
+    padding: 6px 12px;
   }
+
+  .form-group label {
+    font-size: 0.9rem; /* Further adjust label font size */
+  }
+}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 import API from '../api';
 import './Login.css';
 
@@ -69,8 +69,16 @@ function Login({ login }) {
           Login
         </button>
       </form>
+      <div className="signup-section">
+        <p className="signup-text">Don't have an account?</p>
+        <NavLink to="/signup" className="signup-button">
+          Signup
+        </NavLink>
+      </div>
     </div>
   );
+
+
 }
 
 export default Login;
