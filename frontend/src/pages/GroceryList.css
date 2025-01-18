@@ -216,3 +216,69 @@
   transform: scale(1.05);
 }
 
+.change-title-container {
+  text-align: center; /* Center-align the text */
+  margin-bottom: 20px; /* Add spacing below the title */
+}
+
+.change-title-container h3 {
+  color: white; /* White text */
+  background-color: black; /* Black background */
+  padding: 10px 20px; /* Add some padding for better visibility */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 1.5rem; /* Adjust font size */
+  font-weight: bold; /* Bold text */
+  display: inline-block; /* Ensure the background fits the text */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  transition: all 0.3s ease; /* Smooth transition on hover */
+  cursor: pointer; /* Pointer cursor to indicate interactivity */
+}
+
+.change-title-container h3:hover {
+  background-color: rgba(40, 167, 69, 0.9); /* Change background color on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+}
+
+/* Save and Cancel Buttons in Form */
+form .save-button {
+  background-color: rgba(40, 167, 69, 0.9); /* Green for Save */
+  color: white;
+  padding: 5px 10px; /* Small size */
+  font-size: 0.9rem; /* Adjust font size */
+  border: none;
+  border-radius: 15px; /* Rounded edges */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth hover effect */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+form .save-button:hover {
+  background-color: rgba(33, 136, 56, 0.9); /* Darker green on hover */
+  transform: translateY(-1px); /* Slight lift effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+}
+
+form .cancel-button {
+  background-color: rgba(220, 53, 69, 0.9); /* Red for Cancel */
+  color: white;
+  padding: 5px 10px; /* Small size */
+  font-size: 0.9rem; /* Adjust font size */
+  border: none;
+  border-radius: 15px; /* Rounded edges */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth hover effect */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+form .cancel-button:hover {
+  background-color: rgba(200, 35, 51, 0.9); /* Darker red on hover */
+  transform: translateY(-1px); /* Slight lift effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+}
+
+/* Spacing Between Save and Cancel Buttons */
+form .save-button,
+form .cancel-button {
+  margin-right: 10px; /* Space between buttons */
+}

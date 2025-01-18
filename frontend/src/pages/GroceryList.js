@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import './GroceryList.css';
 import Sidebar from '../components/Sidebar'; // Import the Sidebar component
 import logoImage from '../assets/images/Logo.png';
+import changeTitle from '../assets/images/ChangeYourGroceryListTitle.png'
 
 
 
@@ -141,7 +142,13 @@ function GroceryList({ logout }) {
         </NavLink>
       </div>
 
-      {groceryLists && <h1>Change your Grocery List Title</h1>}
+      {/* Conditional Rendering of the Image */}
+      {groceryLists.length > 0 && (
+      <div className="change-title-container">
+        <h3>Click List Title to Change Title</h3>
+      </div>
+    )}
+
 
       {/* Main Content */}
       {groceryLists.length === 0 ? (
