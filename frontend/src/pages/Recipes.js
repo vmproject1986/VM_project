@@ -3,6 +3,7 @@ import API from '../api';
 import { NavLink } from 'react-router-dom';
 import './Recipe.css';
 import Sidebar from '../components/Sidebar'; // Import the Sidebar component
+import logoImage from '../assets/images/Logo.png';
 
 function Recipes({ logout }) {
   const [recipes, setRecipes] = useState([]);
@@ -12,6 +13,13 @@ function Recipes({ logout }) {
   const [editingId, setEditingId] = useState(null); // Track which recipe title is being edited
   const [newTitle, setNewTitle] = useState(''); // Store the updated title
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Track sidebar state
+
+  useEffect(() => {
+      document.body.className = 'food-app';
+      return () => {
+        document.body.className = ''; // Cleanup on component unmount
+      };
+    }, []);
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -82,6 +90,11 @@ function Recipes({ logout }) {
     return <p style={{ color: 'red' }}>{error}</p>;
   }
 
+
+
+
+
+
   return (
     <div className="recipe-container">
       {/* Sidebar */}
@@ -90,7 +103,7 @@ function Recipes({ logout }) {
       {/* Header */}
       <div className="dashboard-header">
         <button className="account-icon" onClick={toggleSidebar}>
-          ☰
+          <img src={logoImage} alt="Account" className="account-logo" />
         </button>
       </div>
 
@@ -106,61 +119,80 @@ function Recipes({ logout }) {
         <p>No recipes found. Try generating some!</p>
       ) : (
         <ul className="recipe-list">
-          {recipes.slice().reverse().map((recipe) => (
-            <li key={recipe.id} className="recipe-item">
-              {editingId === recipe.id ? (
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleEditSubmit(recipe.id);
-                  }}
-                >
-                  <input
-                    type="text"
-                    value={newTitle}
-                    onChange={(e) => setNewTitle(e.target.value)}
-                    className="edit-input"
-                  />
-                  <button type="submit" className="save-button">Save</button>
-                  <button
-                    type="button"
-                    className="cancel-button"
-                    onClick={() => {
-                      setEditingId(null);
-                      setNewTitle('');
-                    }}
-                  >
-                    Cancel
-                  </button>
-                </form>
-              ) : (
-                <h3
-                  onClick={() => {
-                    setEditingId(recipe.id);
-                    setNewTitle(recipe.name);
-                  }}
-                  className="editable-title"
-                >
-                  {recipe.name}
-                </h3>
-              )}
-              <h4>Ingredients:</h4>
-              <p>{recipe.ingredients}</p>
-              <h4>Instructions:</h4>
-              <p>{recipe.instructions}</p>
-              <h4>Grocery List:</h4>
-              <p>{recipe.grocery_list_name}</p>
-              <button
-                className="delete-button"
-                onClick={() => setDeletePopup({ show: true, id: recipe.id })}
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
+  {recipes.slice().reverse().map((recipe) => (
+    <li key={recipe.id} className="recipe-item">
+      {editingId === recipe.id ? (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleEditSubmit(recipe.id);
+          }}
+        >
+          <input
+            type="text"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+            className="edit-input"
+          />
+          <button type="submit" className="save-button">Save</button>
+          <button
+            type="button"
+            className="cancel-button"
+            onClick={() => {
+              setEditingId(null);
+              setNewTitle('');
+            }}
+          >
+            Cancel
+          </button>
+        </form>
+      ) : (
+        <h3
+          onClick={() => {
+            setEditingId(recipe.id);
+            setNewTitle(recipe.name);
+          }}
+          className="editable-title"
+        >
+          {recipe.name}
+        </h3>
+      )}
+      <h4>Ingredients:</h4>
+      <p>{recipe.ingredients}</p>
+      <h4>Instructions:</h4>
+      <p>{recipe.instructions}</p>
+      <h4>Grocery List:</h4>
+      <p>{recipe.grocery_list_name}</p>
+      <button
+        className="delete-button"
+        onClick={() => setDeletePopup({ show: true, id: recipe.id })}
+      >
+        Delete
+      </button>
+      {deletePopup.show && deletePopup.id === recipe.id && (
+        <div className="delete-popup">
+          <p>Are you sure you want to delete this Recipe?</p>
+          <button
+            className="confirm-button"
+            onClick={() => handleDelete(recipe.id)}
+          >
+            Yes
+          </button>
+          <button
+            className="cancel-button"
+            onClick={() => setDeletePopup({ show: false, id: null })}
+          >
+            No
+          </button>
+        </div>
+      )}
+    </li>
+  ))}
+</ul>
+
       )}
 
+      {/* Delete Popup */}
       {deletePopup.show && (
         <div className="delete-popup">
           <p>Are you sure you want to delete this recipe?</p>

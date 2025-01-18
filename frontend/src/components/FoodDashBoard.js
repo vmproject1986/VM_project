@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom'; // Import NavLink
 import './FoodDashBoard.css';
 import Sidebar from './Sidebar';
 import groceryImage from '../assets/images/grocery_image_FDB.jpg';
 import recipeImage from '../assets/images/recipe_image_FDB.jpg';
 import generateImage from '../assets/images/generate_image_FDB.jpg';
+import logoImage from '../assets/images/Logo.png'
+
 
 function FoodDashboard({ logout }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
+
+  useEffect(() => {
+      document.body.className = 'food-app';
+      return () => {
+        document.body.className = ''; // Cleanup on component unmount
+      };
+    }, []);
+
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -22,9 +31,8 @@ function FoodDashboard({ logout }) {
     <div className="food-dashboard-container">
       {/* Header */}
       <div className="dashboard-header">
-        <h1>Food Ecosystem</h1>
         <button className="account-icon" onClick={toggleSidebar}>
-          ☰
+          <img src={logoImage} alt="Account" className="account-logo" />
         </button>
       </div>
 

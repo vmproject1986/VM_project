@@ -202,6 +202,23 @@ function GroceryList({ logout }) {
               >
                 Delete
               </button>
+              {deletePopup.show && deletePopup.id === list.id && (
+                <div className="delete-popup">
+                  <p>Are you sure you want to delete this Grocery List?</p>
+                  <button
+                    className="confirm-button"
+                    onClick={() => handleDelete(list.id)}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    className="cancel-button"
+                    onClick={() => setDeletePopup({ show: false, id: null })}
+                  >
+                    No
+                  </button>
+                </div>
+              )}
               {expandedList === list.id && (
                 <div className="recipes-container">
                   <h4>Recipes:</h4>
@@ -224,6 +241,31 @@ function GroceryList({ logout }) {
                         >
                           Delete Recipe
                         </button>
+                        {recipeDeletePopup.show &&
+                          recipeDeletePopup.recipeId === recipe.id &&
+                          recipeDeletePopup.groceryListId === list.id && (
+                            <div className="delete-popup">
+                              <p>Are you sure you want to delete this Recipe?</p>
+                              <button
+                                className="confirm-button"
+                                onClick={() => handleDeleteRecipe(recipe.id, list.id)}
+                              >
+                                Yes
+                              </button>
+                              <button
+                                className="cancel-button"
+                                onClick={() =>
+                                  setRecipeDeletePopup({
+                                    show: false,
+                                    recipeId: null,
+                                    groceryListId: null,
+                                  })
+                                }
+                              >
+                                No
+                              </button>
+                            </div>
+                          )}
                       </div>
                     ))}
                 </div>
@@ -232,44 +274,9 @@ function GroceryList({ logout }) {
           ))}
         </ul>
       )}
-
-      {/* Delete Confirmation Popups */}
-      {deletePopup.show && (
-        <div className="delete-popup">
-          <p>Are you sure you want to delete this grocery list?</p>
-          <button
-            className="confirm-button"
-            onClick={() => handleDelete(deletePopup.id)}
-          >
-            Yes
-          </button>
-          <button
-            className="cancel-button"
-            onClick={() => setDeletePopup({ show: false, id: null })}
-          >
-            No
-          </button>
-        </div>
-      )}
-
-      {recipeDeletePopup.show && (
-        <div className="delete-popup">
-          <p>Are you sure you want to delete this recipe?</p>
-          <button className="confirm-button" onClick={handleDeleteRecipe}>
-            Yes
-          </button>
-          <button
-            className="cancel-button"
-            onClick={() =>
-              setRecipeDeletePopup({ show: false, recipeId: null, groceryListId: null })
-            }
-          >
-            No
-          </button>
-        </div>
-      )}
     </div>
   );
+
 
 }
 
