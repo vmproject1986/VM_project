@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import './LandingPage.css';
 
 function LandingPage() {
   const [showExplanation, setShowExplanation] = useState(false);
+
+  useEffect(() => {
+    document.body.className = 'home-screens';
+    return () => {
+      document.body.className = ''; // Reset class when unmounting
+    };
+  }, []);
+
 
   return (
     <div className="landing-container">

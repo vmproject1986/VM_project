@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom'; // Import NavLink
 import './Dashboard.css';
 import Sidebar from './Sidebar';
-import habitImage from '../assets/images/habit_image_DB.jpg';
+import habitImage from '../assets/images/habit_image_DB.png';
 import wellnessImage from '../assets/images/wellness_image_DB.jpg';
 import foodImage from '../assets/images/food_image_DB.jpg';
+import logoImage from '../assets/images/Logo.png';
+
 
 function Dashboard({ logout }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.className = 'home-screens';
+    return () => {
+      document.body.className = ''; // Reset class when unmounting
+    };
+  }, []);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -23,7 +32,7 @@ function Dashboard({ logout }) {
       <div className="dashboard-header">
         <h1>Health Ecosystem</h1>
         <button className="account-icon" onClick={toggleSidebar}>
-          ☰
+          <img src={logoImage} alt="Account" className="account-logo" />
         </button>
       </div>
 
@@ -35,7 +44,7 @@ function Dashboard({ logout }) {
           className="dashboard-button top"
           style={{ backgroundImage: `url(${foodImage})` }}
         >
-          <span>Diet & Nutrition</span>
+          <span>Food & Nutrition</span>
         </NavLink>
 
         {/* Bottom row */}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import API from '../api';
 import './Login.css';
@@ -9,6 +9,14 @@ function Login({ login }) {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    document.body.className = 'home-screens';
+    return () => {
+      document.body.className = ''; // Reset class when unmounting
+    };
+  }, []);
+
 
   // Get the target page from the location state or default to dashboard
   const from = location.state?.from?.pathname || '/dashboard';

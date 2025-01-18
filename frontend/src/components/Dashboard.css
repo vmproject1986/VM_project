@@ -1,20 +1,24 @@
 /* General Cleanup and Adjustments */
 
 /* Dashboard container */
+/* Dashboard container */
 .dashboard-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  min-height: 100vh;
-  margin: 0;
-  background-color: #f8f9fa;
+  justify-content: space-between; /* Match spacing behavior */
+  width: 98%; /* Consistent width with FoodDashboard */
+  height: 98vh; /* Match height with FoodDashboard */
+  margin: 1%; /* Adds the spacing between the div and the viewport */
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  /* background-color: #f8f9fa; */ /* Remove this to make the background transparent */
+  /* background-image: url('../assets/images/main_background_with_logo.png'); */ /* Remove this as well */
+  font-family: 'Poppins', sans-serif; /* Ensure consistent font styling */
 }
+
+
 
 /* Header styling */
 .dashboard-header {
@@ -162,4 +166,24 @@
     margin-bottom: 20px;
     height: 40vh; /* Adjust bottom buttons for smaller screens */
   }
+}
+
+.account-icon {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.account-logo {
+  width: 40px; /* Adjust size as needed */
+  height: 40px;
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image scales correctly */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Optional: adds a shadow for depth */
+  transition: transform 0.2s ease; /* Optional: hover effect */
+}
+
+.account-logo:hover {
+  transform: scale(1.1); /* Slight zoom on hover */
 }

@@ -8,6 +8,7 @@ import generateImage from '../assets/images/generate_image_FDB.jpg';
 
 function FoodDashboard({ logout }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);

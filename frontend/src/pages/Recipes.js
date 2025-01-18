@@ -89,7 +89,6 @@ function Recipes({ logout }) {
 
       {/* Header */}
       <div className="dashboard-header">
-        <h1>Recipes</h1>
         <button className="account-icon" onClick={toggleSidebar}>
           ☰
         </button>

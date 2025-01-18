@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../api';
 import useAuth from '../hooks/useAuth';
@@ -12,6 +12,14 @@ function Signup() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
+
+  useEffect(() => {
+    document.body.className = 'home-screens';
+    return () => {
+      document.body.className = ''; // Reset class when unmounting
+    };
+  }, []);
+
 
   const handleSignup = async (e) => {
     e.preventDefault();

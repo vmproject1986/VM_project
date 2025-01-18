@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom'; // Import NavLink
-import habitImage from '../assets/images/habit_image_DB.jpg';
+import habitImage from '../assets/images/habit_image_DB.png';
 import './HabitDashBoard.css';
 
 function HabitDashBoard({ logout }) {

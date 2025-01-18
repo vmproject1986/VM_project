@@ -4,6 +4,9 @@ import API from '../api';
 import { NavLink } from 'react-router-dom';
 import './GroceryList.css';
 import Sidebar from '../components/Sidebar'; // Import the Sidebar component
+import logoImage from '../assets/images/Logo.png';
+
+
 
 function GroceryList({ logout }) {
   const [groceryLists, setGroceryLists] = useState([]);
@@ -16,6 +19,15 @@ function GroceryList({ logout }) {
   const [allRecipes, setAllRecipes] = useState([]); // Store all recipes
   const [recipeDeletePopup, setRecipeDeletePopup] = useState({ show: false, recipeId: null, groceryListId: null });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Track sidebar state
+
+
+  useEffect(() => {
+    document.body.className = 'food-app';
+    return () => {
+      document.body.className = ''; // Cleanup on component unmount
+    };
+  }, []);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -111,15 +123,14 @@ function GroceryList({ logout }) {
   }
 
   return (
-    <div className="grocery-list-container">
+    <div className="grocery-list-container food-app">
       {/* Sidebar */}
       <Sidebar isSidebarOpen={isSidebarOpen} closeSidebar={closeSidebar} logout={logout} />
 
       {/* Header */}
       <div className="dashboard-header">
-        <h1>Grocery Lists</h1>
         <button className="account-icon" onClick={toggleSidebar}>
-          ☰
+          <img src={logoImage} alt="Account" className="account-logo" />
         </button>
       </div>
 
@@ -129,6 +140,8 @@ function GroceryList({ logout }) {
           Back to Food Ecosystem
         </NavLink>
       </div>
+
+      {groceryLists && <h1>Change your Grocery List Title</h1>}
 
       {/* Main Content */}
       {groceryLists.length === 0 ? (
@@ -220,6 +233,7 @@ function GroceryList({ logout }) {
         </ul>
       )}
 
+      {/* Delete Confirmation Popups */}
       {deletePopup.show && (
         <div className="delete-popup">
           <p>Are you sure you want to delete this grocery list?</p>
@@ -256,6 +270,7 @@ function GroceryList({ logout }) {
       )}
     </div>
   );
+
 }
 
 export default GroceryList;

@@ -121,18 +121,21 @@ function FoodForm({ logout }) {
 
       {/* Header */}
       <div className="dashboard-header">
-        <h1>Food Preferences</h1>
-        <button className="account-icon" onClick={toggleSidebar}>
+        <button className="account-icon" onClick={toggleSidebar} aria-label="Toggle Sidebar">
           ☰
         </button>
       </div>
+
+      {/* Back Button */}
       <NavLink to="/food-dashboard" className="back-button">
         Back to Food Ecosystem
       </NavLink>
+
+      {/* Form */}
       <form onSubmit={handleSubmit}>
         {Object.keys(formData).map((key) => (
           <div className="form-group" key={key}>
-            <label htmlFor={key}>{key.replace('_', ' ').toUpperCase()}:</label>
+            <label htmlFor={key}>{key.replace(/_/g, ' ').toUpperCase()}:</label>
             <input
               type="text"
               id={key}
@@ -141,26 +144,40 @@ function FoodForm({ logout }) {
               onChange={handleChange}
               className="form-control"
               disabled={loading}
+              placeholder={`Enter your ${key.replace(/_/g, ' ')}`} // Adds a placeholder for better UX
             />
           </div>
         ))}
-        <button type="submit" className="submit-button" disabled={loading}>
-          {loading ? 'Submitting...' : 'Generate Grocery List & Recipes'}
-        </button>
-      </form>
-      {message && <p className="form-message">{message}</p>}
 
-      {/* Conditionally render the "See New Grocery List" button */}
+
+      {/* Messages */}
+      {message && (
+        <p className={`form-message ${success ? 'success' : 'error'}`}>
+          {message}
+        </p>
+      )}
+
+      {/* See Grocery List Button */}
       {success && (
         <button
-          className="see-list-button"
-          onClick={() => navigate('/grocery-list')}
+        className="see-list-button"
+        onClick={() => navigate('/grocery-list')}
+        title="Click to view the newly generated grocery list"
         >
           See New Grocery List
         </button>
       )}
+
+
+      {/* Submit Button */}
+      <button type="submit" className="submit-button" disabled={loading}>
+        {loading ? 'Submitting...' : 'Generate Grocery List & Recipes'}
+      </button>
+    </form>
+    
     </div>
   );
+
 }
 
 export default FoodForm;

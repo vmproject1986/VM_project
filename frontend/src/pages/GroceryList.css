@@ -1,208 +1,126 @@
-/* GroceryList.css */
-.grocery-list-container {
-  max-width: 800px;
+/* Updated CSS for Grocery List */
+
+.food-app .grocery-list-container {
+  background: none !important;
+  border: none;
+  padding: 0;
   margin: 0 auto;
-  text-align: center;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .grocery-list {
-  list-style: none;
+  margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .grocery-list-item {
-  background-color: #d9d9d9; /* Darkened contrast for visibility */
-  margin-bottom: 15px;
-  padding: 20px;
-  border-radius: 10px; /* Match the container's rounded corners */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Increased shadow for better depth */
-  text-align: left;
   position: relative;
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent to show background */
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  max-width: 750px;
+  width: calc(100% - 40px);
+  color: black; /* Ensure all text in grocery list is black */
 }
 
 .grocery-list-item h3 {
   margin: 0;
-  font-size: 1.4rem; /* Slightly larger for emphasis */
-  color: #222; /* Darker color for better readability */
+  font-size: 1.4rem;
+  color: black; /* Black font */
 }
 
 .grocery-list-item p {
   margin: 10px 0;
-  color: #444; /* Darker gray for improved contrast */
+  color: black; /* Black font */
 }
 
 .grocery-list-item small {
-  color: #666; /* Subtle contrast for less prominent text */
+  color: black; /* Black font */
   font-size: 0.9rem;
 }
 
-.delete-button {
+.grocery-list-item .delete-button {
   padding: 8px 12px;
   font-size: 0.9rem;
   color: white;
-  background-color: #dc3545; /* Standard red for delete */
+  background-color: rgba(220, 53, 69, 0.8); /* Red for delete with transparency */
   border: none;
-  border-radius: 5px;
+  border-radius: 20px; /* Rounded button */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  position: absolute;
-  bottom: 15px; /* Position at the bottom of the card */
-  right: 15px; /* Align to the right inside the card */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
 }
 
-.delete-button:hover {
-  background-color: #c82333; /* Darker red on hover */
-  transform: scale(1.05); /* Slight pop effect */
+.grocery-list-item .delete-button:hover {
+  background-color: rgba(200, 35, 51, 0.8); /* Darker red on hover */
+  transform: scale(1.05);
 }
 
-.delete-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  z-index: 1000;
-  text-align: center;
+.grocery-list-item .see-recipes-button {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: white;
+  background-color: rgba(40, 167, 69, 0.8); /* Matching green with transparency */
+  border: none;
+  border-radius: 20px; /* Rounded button */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.grocery-list-item .see-recipes-button:hover {
+  background-color: rgba(33, 136, 56, 0.8); /* Darker green on hover */
+  transform: scale(1.05);
+}
+
+.recipes-container .delete-recipe-button {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: white;
+  background-color: rgba(220, 53, 69, 0.8); /* Red for recipe delete with transparency */
+  border: none;
+  border-radius: 20px; /* Rounded button */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.recipes-container .delete-recipe-button:hover {
+  background-color: rgba(200, 35, 51, 0.8); /* Darker red on hover */
+  transform: scale(1.05);
 }
 
 .delete-popup p {
-  font-size: 1rem;
-  margin-bottom: 20px;
+  color: black; /* Black font for 'Are you sure' text */
 }
-
-.confirm-button,
-.cancel-button {
-  padding: 8px 16px;
-  margin: 0 10px;
-  font-size: 1rem;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.confirm-button {
-  background-color: #28a745; /* Green for confirmation */
-}
-
-.confirm-button:hover {
-  background-color: #218838;
-}
-
-.cancel-button {
-  background-color: #6c757d; /* Gray for cancel */
-}
-
-.cancel-button:hover {
-  background-color: #5a6268;
-}
-
-.back-button {
-  display: inline-block;
-  margin-bottom: 20px;
-  padding: 10px 15px;
-  font-size: 1rem;
-  color: #fff;
-  background-color: #007bff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.back-button:hover {
-  background-color: #0056b3;
-}
-
-
-.see-list-button {
-  margin-top: 20px;
-  padding: 12px 20px;
-  font-size: 1.2rem;
-  color: #fff;
-  background-color: #28a745; /* Green for success */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.see-list-button:hover {
-  background-color: #218838;
-}
-
-
-.see-recipes-button {
-  padding: 8px 12px;
-  font-size: 1rem;
-  color: white;
-  background-color: #28a745; /* Green for success */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-left: 10px; /* Add spacing between the generated date and the button */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
-}
-
-.see-recipes-button:hover {
-  background-color: #218838; /* Darker green on hover */
-  transform: scale(1.05); /* Slight pop effect */
-}
-
-
-.delete-recipe-button {
-  padding: 8px 12px;
-  font-size: 0.9rem;
-  color: white;
-  background-color: #dc3545; /* Red for delete */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 10px; /* Add space above the button */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
-}
-
-.delete-recipe-button:hover {
-  background-color: #c82333; /* Darker red on hover */
-  transform: scale(1.05); /* Slight pop effect */
-}
-
 
 .dashboard-header {
+  margin-top: 20px; /* Adds space below the header for better visibility */
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 20px;
+  justify-content: space-between;
 }
 
-.dashboard-header h2 {
-  margin: 0;
-  font-size: 1.8rem;
-  color: #222;
+.food-app h1 {
+  font-size: 2rem; /* Increases the size of the title */
+  font-weight: bold; /* Makes the text bold */
+  color: black; /* Sets the text color to black */
+  text-align: center; /* Center-aligns the text */
 }
 
-.account-icon {
-  font-size: 1.5rem;
-  cursor: pointer;
-  background: none;
+.back-button-container .back-button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: bold; /* Makes the font bold */
+  color: white;
+  background-color: rgba(0, 123, 255, 0.8); /* Blue button color with transparency */
   border: none;
-  color: #007bff;
-  transition: color 0.3s ease;
+  border-radius: 20px; /* Rounded button */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.account-icon:hover {
-  color: #0056b3;
+.back-button-container .back-button:hover {
+  background-color: rgba(0, 86, 179, 0.8); /* Darker blue on hover */
+  transform: scale(1.05);
 }

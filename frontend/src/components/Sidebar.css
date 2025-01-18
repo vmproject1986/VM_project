@@ -16,8 +16,8 @@ body .sidebar {
   align-items: center !important;
   justify-content: flex-start !important;
   overflow-y: auto !important;
-  padding: 20px !important;
-  box-sizing: border-box !important;
+  /* padding: 20px !important; */
+  /* box-sizing: border-box !important; */
 }
 
 body .sidebar.active {

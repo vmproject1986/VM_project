@@ -6,11 +6,15 @@
     width: 98%;
     height: 98vh;
     margin: 1%;
-    background-color: #f8f9fa;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    background-image: url('../assets/images/main_background_with_logo.png'); /* Path to your image */
+    background-size: cover; /* Ensures the image covers the entire viewport */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    font-family: 'Poppins', sans-serif; /* Ensure consistent font styling */
   }
 
   .dashboard-header {
