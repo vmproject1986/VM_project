@@ -23,6 +23,8 @@ function FoodForm({ logout }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Track sidebar state
   const navigate = useNavigate();
 
+  let isSubmitting = false; // Prevent duplicate submissions
+
   // Function to get user ID from the token
   const getUserIdFromToken = () => {
     const token = localStorage.getItem('access_token');
@@ -39,11 +41,11 @@ function FoodForm({ logout }) {
   };
 
   useEffect(() => {
-      document.body.className = 'food-app';
-      return () => {
-        document.body.className = ''; // Cleanup on component unmount
-      };
-    }, []);
+    document.body.className = 'food-app';
+    return () => {
+      document.body.className = ''; // Cleanup on component unmount
+    };
+  }, []);
 
   // Fetch user preferences on component load
   useEffect(() => {
@@ -52,6 +54,7 @@ function FoodForm({ logout }) {
       if (!userId) return;
 
       try {
+        console.log('Fetching user preferences...');
         const response = await API.get(`/user/${userId}/`);
         const profile = response.data.profile || {};
         // Populate form fields with user preferences or leave blank if null
@@ -84,6 +87,9 @@ function FoodForm({ logout }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return; // Prevent duplicate submissions
+    isSubmitting = true;
+
     setLoading(true);
     setMessage('');
     setSuccess(false); // Reset success state
@@ -92,6 +98,7 @@ function FoodForm({ logout }) {
     if (!userId) {
       setMessage('Failed to retrieve user ID. Please log in again.');
       setLoading(false);
+      isSubmitting = false;
       return;
     }
 
@@ -101,10 +108,12 @@ function FoodForm({ logout }) {
     );
 
     try {
+      console.log('Updating preferences...');
       // Step 1: Update user preferences
       await API.put(`/user/${userId}/`, { profile: filteredData });
       setMessage('Preferences updated successfully!');
 
+      console.log('Generating grocery list...');
       // Step 2: Trigger OpenAI API call to generate data
       await API.post('/food/generate-grocery-list/', {
         prompt: `Generate a weekly grocery list, followed by recipes based on that list. The grocery list should be labeled 'Grocery List:'. Each recipe should be labeled 'Recipe:'. Each recipe should include a name, ingredients, and instructions. If any of the following details are included, prioritize the grocery list around them: ${JSON.stringify(
@@ -119,7 +128,14 @@ function FoodForm({ logout }) {
       setMessage('Failed to update preferences or generate data. Please try again later.');
     } finally {
       setLoading(false);
+      isSubmitting = false;
     }
+  };
+
+  const handleNavigateToGroceryList = (e) => {
+    e.preventDefault();
+    if (!success) return; // Prevent navigation if no success
+    navigate('/grocery-list');
   };
 
   return (
@@ -138,6 +154,9 @@ function FoodForm({ logout }) {
       <NavLink to="/food-dashboard" className="back-button">
         Back to Food Ecosystem
       </NavLink>
+      <div>
+        <p>(All Fields are OPTIONAL, but the more specific you are, the more specific your lists!))</p>
+      </div>
 
       {/* Form */}
       <form onSubmit={handleSubmit}>
@@ -157,35 +176,31 @@ function FoodForm({ logout }) {
           </div>
         ))}
 
+        {/* Messages */}
+        {message && (
+          <p className={`form-message ${success ? 'success' : 'error'}`}>
+            {message}
+          </p>
+        )}
 
-      {/* Messages */}
-      {message && (
-        <p className={`form-message ${success ? 'success' : 'error'}`}>
-          {message}
-        </p>
-      )}
+        {/* See Grocery List Button */}
+        {success && (
+          <button
+            className="see-list-button"
+            onClick={handleNavigateToGroceryList}
+            title="Click to view the newly generated grocery list"
+          >
+            See New Grocery List
+          </button>
+        )}
 
-      {/* See Grocery List Button */}
-      {success && (
-        <button
-        className="see-list-button"
-        onClick={() => navigate('/grocery-list')}
-        title="Click to view the newly generated grocery list"
-        >
-          See New Grocery List
+        {/* Submit Button */}
+        <button type="submit" className="submit-button" disabled={loading}>
+          {loading ? 'Submitting...' : 'Generate Grocery List & Recipes'}
         </button>
-      )}
-
-
-      {/* Submit Button */}
-      <button type="submit" className="submit-button" disabled={loading}>
-        {loading ? 'Submitting...' : 'Generate Grocery List & Recipes'}
-      </button>
-    </form>
-
+      </form>
     </div>
   );
-
 }
 
 export default FoodForm;

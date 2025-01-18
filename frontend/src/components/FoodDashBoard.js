@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom'; // Import NavLink
 import './FoodDashBoard.css';
 import Sidebar from './Sidebar';
-import groceryImage from '../assets/images/grocery_image_FDB.jpg';
-import recipeImage from '../assets/images/recipe_image_FDB.jpg';
+import groceryImage from '../assets/images/grocerylist_dashboard_image.jpg';
+import recipeImage from '../assets/images/recipe_dashboard_image.jpg';
 import generateImage from '../assets/images/generate_image_FDB.jpg';
 import logoImage from '../assets/images/Logo.png'
 

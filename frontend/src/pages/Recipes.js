@@ -95,6 +95,12 @@ function Recipes({ logout }) {
 
 
 
+
+
+
+  
+
+
   return (
     <div className="recipe-container">
       {/* Sidebar */}
@@ -119,99 +125,80 @@ function Recipes({ logout }) {
         <p>No recipes found. Try generating some!</p>
       ) : (
         <ul className="recipe-list">
-  {recipes.slice().reverse().map((recipe) => (
-    <li key={recipe.id} className="recipe-item">
-      {editingId === recipe.id ? (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleEditSubmit(recipe.id);
-          }}
-        >
-          <input
-            type="text"
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-            className="edit-input"
-          />
-          <button type="submit" className="save-button">Save</button>
-          <button
-            type="button"
-            className="cancel-button"
-            onClick={() => {
-              setEditingId(null);
-              setNewTitle('');
-            }}
-          >
-            Cancel
-          </button>
-        </form>
-      ) : (
-        <h3
-          onClick={() => {
-            setEditingId(recipe.id);
-            setNewTitle(recipe.name);
-          }}
-          className="editable-title"
-        >
-          {recipe.name}
-        </h3>
-      )}
-      <h4>Ingredients:</h4>
-      <p>{recipe.ingredients}</p>
-      <h4>Instructions:</h4>
-      <p>{recipe.instructions}</p>
-      <h4>Grocery List:</h4>
-      <p>{recipe.grocery_list_name}</p>
-      <button
-        className="delete-button"
-        onClick={() => setDeletePopup({ show: true, id: recipe.id })}
-      >
-        Delete
-      </button>
-      {deletePopup.show && deletePopup.id === recipe.id && (
-        <div className="delete-popup">
-          <p>Are you sure you want to delete this Recipe?</p>
-          <button
-            className="confirm-button"
-            onClick={() => handleDelete(recipe.id)}
-          >
-            Yes
-          </button>
-          <button
-            className="cancel-button"
-            onClick={() => setDeletePopup({ show: false, id: null })}
-          >
-            No
-          </button>
-        </div>
-      )}
-    </li>
-  ))}
-</ul>
-
-      )}
-
-      {/* Delete Popup */}
-      {deletePopup.show && (
-        <div className="delete-popup">
-          <p>Are you sure you want to delete this recipe?</p>
-          <button
-            className="confirm-button"
-            onClick={() => handleDelete(deletePopup.id)}
-          >
-            Yes
-          </button>
-          <button
-            className="cancel-button"
-            onClick={() => setDeletePopup({ show: false, id: null })}
-          >
-            No
-          </button>
-        </div>
+          {recipes.slice().reverse().map((recipe) => (
+            <li key={recipe.id} className="recipe-item">
+              {editingId === recipe.id ? (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    handleEditSubmit(recipe.id);
+                  }}
+                >
+                  <input
+                    type="text"
+                    value={newTitle}
+                    onChange={(e) => setNewTitle(e.target.value)}
+                    className="edit-input"
+                  />
+                  <button type="submit" className="save-button">Save</button>
+                  <button
+                    type="button"
+                    className="cancel-button"
+                    onClick={() => {
+                      setEditingId(null);
+                      setNewTitle('');
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </form>
+              ) : (
+                <h3
+                  onClick={() => {
+                    setEditingId(recipe.id);
+                    setNewTitle(recipe.name);
+                  }}
+                  className="editable-title"
+                >
+                  {recipe.name}
+                </h3>
+              )}
+              <h4>Ingredients:</h4>
+              <p>{recipe.ingredients}</p>
+              <h4>Instructions:</h4>
+              <p>{recipe.instructions}</p>
+              <h4>This Recipe is from:</h4>
+              <p>{recipe.grocery_list_name}</p>
+              <button
+                className="delete-button"
+                onClick={() => setDeletePopup({ show: true, id: recipe.id })}
+              >
+                Delete
+              </button>
+              {deletePopup.show && deletePopup.id === recipe.id && (
+                <div className="delete-popup">
+                  <p>Are you sure you want to delete this Recipe?</p>
+                  <button
+                    className="confirm-button"
+                    onClick={() => handleDelete(recipe.id)}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    className="cancel-button"
+                    onClick={() => setDeletePopup({ show: false, id: null })}
+                  >
+                    No
+                  </button>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
+
 }
 
 export default Recipes;

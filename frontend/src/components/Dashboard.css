@@ -16,6 +16,7 @@
   /* background-color: #f8f9fa; */ /* Remove this to make the background transparent */
   /* background-image: url('../assets/images/main_background_with_logo.png'); */ /* Remove this as well */
   font-family: 'Poppins', sans-serif; /* Ensure consistent font styling */
+  color: black;
 }
 
 

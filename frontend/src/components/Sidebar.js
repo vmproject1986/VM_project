@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 import About from '../pages/About';
 import Pricing from '../pages/Pricing';
-import Contact from '../pages/Contact';
 import Resources from '../pages/Resources';
 
 function Sidebar({ isSidebarOpen, closeSidebar, logout }) {
@@ -55,6 +54,7 @@ function Sidebar({ isSidebarOpen, closeSidebar, logout }) {
                         Feedback
                         {activeDropdown === 'contact' && (
                             <div className="dropdown">
+                                <p>Please share your thoughts!  Your Feedback is super helpful to make your experience even better!</p>
                             <button
                               className="feedback-button"
                               onClick={() => navigate('/contact')}
