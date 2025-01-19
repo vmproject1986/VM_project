@@ -59,8 +59,6 @@ SIMPLE_JWT = {
 
 # CORS Settings
 CORS_ALLOWED_ORIGINS = [
-    "https://vm-project-6kcc.onrender.com",  # Backend
-    "http://localhost:3000",  # For local testing
     "https://remarkable-jalebi-0f1b49.netlify.app"
 ]
 
