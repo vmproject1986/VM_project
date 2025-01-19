@@ -62,6 +62,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://vm-project-6kcc.onrender.com",  # Backend
     "https://your-frontend-domain.com",  # Frontend
     "http://localhost:3000",  # For local testing
+    "https://remarkable-jalebi-0f1b49.netlify.app/"
 ]
 
 
