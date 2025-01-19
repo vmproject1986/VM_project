@@ -58,10 +58,14 @@ SIMPLE_JWT = {
 
 # CORS Settings
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "https://your-production-domain.onrender.com",  # Replace with Render domain
+    "http://localhost:3000",  # Local development
+    "https://vm-project-6kcc.onrender.com",  # Production domain
 ]
 
+# Allow credentials for authenticated requests
+CORS_ALLOW_CREDENTIALS = True
+
+# Allow specific methods (optional, defaults to safe methods)
 CORS_ALLOW_METHODS = [
     "DELETE",
     "GET",
@@ -71,7 +75,14 @@ CORS_ALLOW_METHODS = [
     "PUT",
 ]
 
-CORS_ALLOW_CREDENTIALS = True
+# Optional: Specify allowed headers
+CORS_ALLOW_HEADERS = [
+    "content-type",
+    "authorization",
+    "x-requested-with",
+    "x-csrftoken",
+]
+
 
 # Application definition
 INSTALLED_APPS = [
