@@ -36,7 +36,7 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 
 # Allowed Hosts
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "https://vm-project-6kcc.onrender.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "vm-project-6kcc.onrender.com"]
 
 
 # REST Framework Configuration
@@ -59,8 +59,11 @@ SIMPLE_JWT = {
 
 # CORS Settings
 CORS_ALLOWED_ORIGINS = [
-    "https://vm-project-6kcc.onrender.com",  # Production domain
+    "https://vm-project-6kcc.onrender.com",  # Backend
+    "https://your-frontend-domain.com",  # Frontend
+    "http://localhost:3000",  # For local testing
 ]
+
 
 # Allow credentials for authenticated requests
 CORS_ALLOW_CREDENTIALS = True
