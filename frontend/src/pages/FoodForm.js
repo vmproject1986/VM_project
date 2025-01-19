@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import API from '../api';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar'; // Import Sidebar component
-import { jwtDecode } from 'jwt-decode'; // Import jwt-decode for decoding the token
+import { jwtDecode } from 'jwt-decode';
+
 import './FoodForm.css';
 import logoImage from '../assets/images/Logo.png';
 

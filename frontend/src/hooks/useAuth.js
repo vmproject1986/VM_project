@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode'; // Ensure correct import
+import { jwtDecode } from 'jwt-decode';
+
+
 
 function useAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
