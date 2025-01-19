@@ -36,7 +36,8 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 
 # Allowed Hosts
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "https://vm-project-6kcc.onrender.com"]
+
 
 # REST Framework Configuration
 REST_FRAMEWORK = {
