@@ -12,13 +12,18 @@ function Contact() {
   const sendEmail = (e) => {
     e.preventDefault();
 
+    // Accessing environment variables
+    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
+    const userId = process.env.REACT_APP_EMAILJS_USER_ID;
+
+    if (!serviceId || !templateId || !userId) {
+      toast.error('Email service is not configured properly. Please try again later.');
+      return;
+    }
+
     emailjs
-      .sendForm(
-        'service_grcq3ee', // Replace with your EmailJS Service ID
-        'template_mx6xfnd', // Replace with your EmailJS Template ID
-        form.current,
-        '2tZNWzIvUOoPgPfJC' // Replace with your EmailJS User ID (or public key)
-      )
+      .sendForm(serviceId, templateId, form.current, userId)
       .then(
         () => {
           toast.success('Your message has been sent successfully!', {
