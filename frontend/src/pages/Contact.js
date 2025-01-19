@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
-import emailjs from 'emailjs-com';
+import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Contact.css';
@@ -9,33 +9,33 @@ function Contact() {
   const form = useRef();
   const navigate = useNavigate();
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
 
-    // Accessing environment variables
-    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
-    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-    const userId = process.env.REACT_APP_EMAILJS_USER_ID;
+    try {
+      const formData = new FormData(form.current);
 
-    if (!serviceId || !templateId || !userId) {
-      toast.error('Email service is not configured properly. Please try again later.');
-      return;
-    }
-
-    emailjs
-      .sendForm(serviceId, templateId, form.current, userId)
-      .then(
-        () => {
-          toast.success('Your message has been sent successfully!', {
-            onClose: () => navigate('/dashboard'), // Redirect after toast closes
-          });
-        },
-        () => {
-          toast.error('An error occurred. Please try again later.', {
-            onClose: () => navigate('/dashboard'), // Redirect after toast closes
-          });
+      // Post to the backend
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/send-email/`,
+        {
+          to_name: formData.get('to_name'),
+          from_name: formData.get('from_name'),
+          message: formData.get('message'),
         }
       );
+
+      if (response.data.success) {
+        toast.success(response.data.success, {
+          onClose: () => navigate('/dashboard'), // Redirect after toast
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('An error occurred. Please try again later.', {
+        onClose: () => navigate('/dashboard'), // Redirect after toast
+      });
+    }
   };
 
   return (
@@ -61,7 +61,6 @@ function Contact() {
         <button type="submit" className="submit-button">Send</button>
       </form>
 
-      {/* Toast Container */}
       <ToastContainer />
     </div>
   );
