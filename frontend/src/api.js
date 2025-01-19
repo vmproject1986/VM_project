@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an Axios instance
 const API = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: process.env.REACT_APP_BACKEND_URL, // Use environment variable for base URL
 });
 
 // Add a request interceptor to include the token in the headers
@@ -28,9 +28,12 @@ API.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       try {
         const refreshToken = localStorage.getItem('refresh_token');
-        const refreshResponse = await axios.post('http://localhost:8000/api/token/refresh/', {
-          refresh: refreshToken,
-        });
+        const refreshResponse = await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/token/refresh/`, // Use environment variable for refresh URL
+          {
+            refresh: refreshToken,
+          }
+        );
 
         // Store the new access and refresh tokens
         localStorage.setItem('access_token', refreshResponse.data.access);
@@ -49,6 +52,5 @@ API.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
 
 export default API;

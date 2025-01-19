@@ -29,7 +29,6 @@ function Signup() {
     try {
       // Create a new user
       await API.post('/user/create/', { username, password, email });
-      console.log('Signup successful!');
 
       // Automatically log in after signup
       const loginResponse = await API.post('/token/', { username, password });

@@ -5,8 +5,6 @@ import useAuth from '../hooks/useAuth';
 function ProtectedRoute() {
   const { isAuthenticated, loading } = useAuth();
 
-    console.log(isAuthenticated);
-    console.log(loading);
 
   if (loading) {
     // Prevent premature redirects while authentication state is loading

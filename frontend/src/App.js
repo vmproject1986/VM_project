@@ -62,8 +62,7 @@ function App() {
   };
 
 
-  console.log(isAuthenticated);
-  console.log(loading);
+
 
   return (
     <Router>

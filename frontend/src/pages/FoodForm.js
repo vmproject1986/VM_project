@@ -54,7 +54,6 @@ function FoodForm({ logout }) {
       if (!userId) return;
 
       try {
-        console.log('Fetching user preferences...');
         const response = await API.get(`/user/${userId}/`);
         const profile = response.data.profile || {};
         // Populate form fields with user preferences or leave blank if null
@@ -108,12 +107,9 @@ function FoodForm({ logout }) {
     );
 
     try {
-      console.log('Updating preferences...');
       // Step 1: Update user preferences
       await API.put(`/user/${userId}/`, { profile: filteredData });
       setMessage('Preferences updated successfully!');
-
-      console.log('Generating grocery list...');
       // Step 2: Trigger OpenAI API call to generate data
       await API.post('/food/generate-grocery-list/', {
         prompt: `Generate a weekly grocery list, followed by recipes based on that list. The grocery list should be labeled 'Grocery List:'. Each recipe should be labeled 'Recipe:'. Each recipe should include a name, ingredients, and instructions. If any of the following details are included, prioritize the grocery list around them: ${JSON.stringify(

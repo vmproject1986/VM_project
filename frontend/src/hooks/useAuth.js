@@ -40,7 +40,6 @@ function useAuth() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     setIsAuthenticated(false);
-    console.log('Is Authenticated:', isAuthenticated);
   };
 
   return {

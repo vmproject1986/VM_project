@@ -10,7 +10,6 @@ function Sidebar({ isSidebarOpen, closeSidebar, logout }) {
     const [activeDropdown, setActiveDropdown] = useState(null); // Track which dropdown is active
 
     const handleLogout = () => {
-        console.log('Logout button clicked');
         logout();
         navigate('/');
     };

@@ -10,9 +10,9 @@ function WellnessDashboard({ logout }) {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const closeSidebar = () => {
-    setIsSidebarOpen(false);
-  };
+  // const closeSidebar = () => {
+  //   setIsSidebarOpen(false);
+  // };
 
   return (
     <div className="wellness-dashboard-container">

@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 import './GroceryList.css';
 import Sidebar from '../components/Sidebar'; // Import the Sidebar component
 import logoImage from '../assets/images/Logo.png';
-import changeTitle from '../assets/images/ChangeYourGroceryListTitle.png'
 
 
 
