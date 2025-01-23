@@ -4,7 +4,10 @@ from .base import *
 DEBUG = False
 
 # Allowed hosts for production
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = [
+    "vm-project-6kcc.onrender.com",
+    "remarkable-jalebi-0f1b49.netlify.app",
+]
 
 # Production database (e.g., PostgreSQL on Render)
 DATABASES = {
