@@ -20,7 +20,7 @@ DATABASES = {
 
 # Production CORS settings
 CORS_ALLOWED_ORIGINS = [
-    "https://remarkable-jalebi-0f1b49.netlify.app/",  # Replace with Netlify domain
+    "https://remarkable-jalebi-0f1b49.netlify.app",  # Replace with Netlify domain
     "https://vm-project-6kcc.onrender.com",  # Replace with Render domain
 ]
 
