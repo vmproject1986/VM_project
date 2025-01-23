@@ -16,7 +16,7 @@ DATABASES = {
 
 # Development CORS settings
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Frontend running locally
+    "http://localhost:3000", "http://127.0.0.1:8000",  # Frontend running locally
 ]
 
 # Any other development-only settings can be added here
