@@ -7,6 +7,7 @@ function Login({ login }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,13 +18,13 @@ function Login({ login }) {
     };
   }, []);
 
-
   // Get the target page from the location state or default to dashboard
   const from = location.state?.from?.pathname || '/dashboard';
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(null);
+    setShowPopup(true); // Show the popup when login is clicked
 
     try {
       const response = await API.post('/token/', { username, password });
@@ -31,11 +32,17 @@ function Login({ login }) {
       // Use the login method passed as a prop
       login(response.data.access, response.data.refresh);
 
+      setShowPopup(false); // Close the popup if login succeeds
       navigate(from, { replace: true });
     } catch (error) {
       console.error('Login failed:', error);
       setError('Invalid username or password');
+      // Keep the popup open for the user to interact with the game
     }
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
   };
 
   return (
@@ -75,10 +82,30 @@ function Login({ login }) {
           Signup
         </NavLink>
       </div>
+
+      {/* Popup for backend loading */}
+      {showPopup && (
+        <div className="popup-overlay" onClick={closePopup}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <h2>Backend Loading</h2>
+            <p>
+              The backend is loading and may take a few minutes...while you wait,
+              would you like to play a game?
+            </p>
+            {/* Embed an external website */}
+            <iframe
+              src="https://doakmath.github.io/wesleys-dog-game/"
+              title="Embedded Game"
+              className="game-iframe"
+            ></iframe>
+            <button className="close-button" onClick={closePopup}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
-
-
 }
 
 export default Login;
