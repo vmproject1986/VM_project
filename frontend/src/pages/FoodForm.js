@@ -107,15 +107,68 @@ function FoodForm({ logout }) {
       Object.entries(formData).filter(([key, value]) => value !== '')
     );
 
+
     try {
       // Step 1: Update user preferences
       await API.put(`/user/${userId}/`, { profile: filteredData });
       setMessage('Preferences updated successfully!');
       // Step 2: Trigger OpenAI API call to generate data
       await API.post('/food/generate-grocery-list/', {
-        prompt: `Generate a weekly grocery list, followed by recipes based on that list. The grocery list should be labeled 'Grocery List:'. Each recipe should be labeled 'Recipe:'. Each recipe should include a name, ingredients, and instructions. If any of the following details are included, prioritize the grocery list around them: ${JSON.stringify(
-          filteredData
-        )}`,
+        prompt: `
+
+
+
+
+
+Generate a weekly grocery list, followed by 5 recipes based on that list.
+The grocery list should have a name and include numeric amounts with the items.
+Each recipe should be labeled 'Recipe'.
+Each recipe should include a name, ingredients, and instructions.
+If any of the following user preferences are included,
+ prioritize the grocery list around the included
+  user preferences prioritizing from most important to least important user preferences
+   in this order:
+  1. Allergies
+  2. Dietary restrictions
+  3. Dietary preferences
+  4. Budget
+  5. Health goals
+  6. Preferred foods
+  7. Lifestyle
+  8. Additional info
+
+  User preferences are: ${JSON.stringify(filteredData)}
+
+The OUTPUT should look like this:
+
+Weekly Grocery List:
+
+[amount, item],
+[amount, item],
+...
+
+
+
+
+
+Recipe:
+[recipe name]
+[ingredients]
+[instructions]
+
+Recipe:
+[recipe name]
+[ingredients]
+[instructions]
+
+...
+
+
+
+
+
+
+`,
       });
 
       setSuccess(true); // Mark response as successful
@@ -135,6 +188,8 @@ function FoodForm({ logout }) {
     navigate('/grocery-list');
   };
 
+
+
   return (
     <div className="food-form-container">
       {/* Sidebar */}
@@ -152,26 +207,44 @@ function FoodForm({ logout }) {
         Back to Food Ecosystem
       </NavLink>
       <div>
-        <p>(All Fields are OPTIONAL, but the more specific you are, the more specific your lists!))</p>
+        <p>All Fields are OPTIONAL.  You can use full sentences, or single words, or leave them blank or say none.</p>
+        <p>The more you tailor your PREFERENCES, the more tailored your grocery lists become.</p>
       </div>
 
       {/* Form */}
       <form onSubmit={handleSubmit}>
-        {Object.keys(formData).map((key) => (
-          <div className="form-group" key={key}>
-            <label htmlFor={key}>{key.replace(/_/g, ' ').toUpperCase()}:</label>
-            <input
-              type="text"
-              id={key}
-              name={key}
-              value={formData[key]}
-              onChange={handleChange}
-              className="form-control"
-              disabled={loading}
-              placeholder={`Enter your ${key.replace(/_/g, ' ')}`} // Adds a placeholder for better UX
-            />
-          </div>
-        ))}
+        {Object.keys(formData).map((key) => {
+          // Define custom label mapping
+          const labelMapping = {
+            allergies: 'Allergies: Are you allergic to anything??',
+            dietary_restrictions: 'Dietary Restrictions: Is there anything you want kept off the list?',
+            dietary_preferences: 'Dietary Preferences: Are you following any specific diet or program, such as Keto?',
+            preferred_foods: 'Preferred Foods: Are there any foods you want included?',
+            lifestyle: 'Lifestyle: Are you active, sedentary, an athlete, etc.?',
+            health_goals: 'Health Goals: Do you have any special health goals?',
+            budget: 'Budget: How much can you spend on groceries per week?',
+            additional_info: 'Additional Info: Any thing we forgot and you want to add?',
+          };
+
+          // Use the custom label if it exists, otherwise fallback to default
+          const label = labelMapping[key] || key.replace(/_/g, ' ').toUpperCase();
+
+          return (
+            <div className="form-group" key={key}>
+              <label htmlFor={key}>{label}</label>
+              <input
+                type="text"
+                id={key}
+                name={key}
+                value={formData[key]}
+                onChange={handleChange}
+                className="form-control"
+                disabled={loading}
+                placeholder={`Enter your ${key.replace(/_/g, ' ')}`}
+              />
+            </div>
+          );
+        })}
 
         {/* Messages */}
         {message && (
@@ -198,6 +271,7 @@ function FoodForm({ logout }) {
       </form>
     </div>
   );
+
 }
 
 export default FoodForm;

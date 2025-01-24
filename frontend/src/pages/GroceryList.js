@@ -274,12 +274,7 @@ function GroceryList({ logout }) {
         </ul>
       )}
 
-      {/* Conditional Rendering of the Image */}
-      {groceryLists.length > 0 && (
-      <div className="change-title-container">
-        <h3>Click List Name to Change</h3>
-      </div>
-    )}
+     
     </div>
   );
 
