@@ -1,20 +1,18 @@
-/* Updated Signup Page CSS */
-
 .signup-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Center content vertically */
-  height: 100vh; /* Full viewport height */
-  padding: 20px; /* Add padding for better spacing */
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
   text-align: center;
-  box-sizing: border-box; /* Include padding in height calculation */
+  box-sizing: border-box;
 }
 
 .signup-title {
   font-size: 2.5rem;
   margin-bottom: 20px;
-  color: rgb(255, 255, 255); /* Change title font color to black */
+  color: black;
 }
 
 .signup-form {
@@ -24,7 +22,6 @@
   width: 100%;
   max-width: 400px;
   gap: 15px;
-  margin-top: 20px; /* Add space from the title */
 }
 
 .form-group {
@@ -35,10 +32,9 @@
 
 label {
   margin-bottom: 5px;
-  font-size: 2.5rem;
+  font-size: 1.1rem;
   text-align: left;
-  color: black; /* Ensure label text is black */
-  font-weight: bold;
+  color: black;
 }
 
 input {
@@ -70,33 +66,78 @@ input {
   margin-bottom: 10px;
 }
 
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 500px;
+  width: 80%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.game-iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+  margin-top: 10px;
+}
+
+.close-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background-color: #0056b3;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .signup-title {
-    font-size: 2rem; /* Scale down title for smaller screens */
+    font-size: 2rem;
+  }
+
+  input {
+    font-size: 0.9rem;
   }
 
   .signup-button {
-    font-size: 1rem; /* Adjust button font size */
-    padding: 8px 15px; /* Adjust padding for smaller screens */
-  }
-
-  .form-group label {
-    font-size: 1rem; /* Adjust label font size */
+    font-size: 1rem;
+    padding: 8px 15px;
   }
 }
 
 @media (max-width: 480px) {
   .signup-title {
-    font-size: 1.8rem; /* Further scale down title */
+    font-size: 1.8rem;
+  }
+
+  input {
+    font-size: 0.8rem;
   }
 
   .signup-button {
     font-size: 0.9rem;
     padding: 6px 12px;
-  }
-
-  .form-group label {
-    font-size: 0.9rem; /* Further adjust label font size */
   }
 }

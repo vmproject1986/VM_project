@@ -10,6 +10,7 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -20,11 +21,10 @@ function Signup() {
     };
   }, []);
 
-
   const handleSignup = async (e) => {
     e.preventDefault();
     setError(null);
-    setLoading(true);
+    setShowPopup(true); // Show popup when signup is clicked
 
     try {
       // Create a new user
@@ -34,14 +34,19 @@ function Signup() {
       const loginResponse = await API.post('/token/', { username, password });
       login(loginResponse.data.access, loginResponse.data.refresh);
 
-      // Redirect to dashboard after successful login
+      setShowPopup(false); // Close the popup if signup succeeds
       navigate('/dashboard', { replace: true });
     } catch (err) {
       console.error('Signup failed:', err);
       setError(err.response?.data?.error || 'An error occurred during signup.');
+      // Keep the popup open for the user to interact with the game
     } finally {
       setLoading(false);
     }
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
   };
 
   return (
@@ -89,6 +94,29 @@ function Signup() {
           {loading ? 'Signing up...' : 'Signup'}
         </button>
       </form>
+
+      {/* Popup for backend loading */}
+      {showPopup && (
+        <div className="popup-overlay" onClick={closePopup}>
+          <div className="popup-content" onClick={(e) => e.stopPropagation()}>
+            <h2>Backend Loading...</h2>
+            <p>
+              The backend is loading and may take a few minutes...while you wait,
+              would you like to play a game?
+              (If it doesn't load after 2 minutes, check for errors or reload the page!)
+            </p>
+            {/* Embed an external website */}
+            <iframe
+              src="https://doakmath.github.io/wesleys-dog-game/"
+              title="Embedded Game"
+              className="game-iframe"
+            ></iframe>
+            <button className="close-button" onClick={closePopup}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

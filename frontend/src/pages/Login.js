@@ -87,10 +87,11 @@ function Login({ login }) {
       {showPopup && (
         <div className="popup-overlay" onClick={closePopup}>
           <div className="popup-content" onClick={(e) => e.stopPropagation()}>
-            <h2>Backend Loading</h2>
+            <h2>Backend Loading...</h2>
             <p>
               The backend is loading and may take a few minutes...while you wait,
               would you like to play a game?
+              (If it doesn't load after 2 minutes, check for errors or reload the page!)
             </p>
             {/* Embed an external website */}
             <iframe

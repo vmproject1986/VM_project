@@ -13,8 +13,9 @@ from rest_framework.response import Response
 from django.conf import settings
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])  # Require authentication
 def send_email(request):
-    to_name = request.data.get('to_name')
+    to_name = 'vm.project1986@gmail.com'
     from_name = request.data.get('from_name')
     message = request.data.get('message')
 
